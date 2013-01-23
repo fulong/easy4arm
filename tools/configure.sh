@@ -75,7 +75,7 @@ CrossCompiler_Select()
 #输入指令集版本选择。
 ARCH_Select()
 {
-	local ARCH_VAR='armv7-m\narmv4t\n' #可供选择的指令集
+	local ARCH_VAR='armv7-m\narmv4t\narmv7-a\n' #可供选择的指令集
 	local flag=1 #初始化这个自动变量，使下面的能正确使用这个变量
 	while [ "$flag" != "0" ];do
 	dialog --clear
@@ -87,7 +87,7 @@ ARCH_Select()
 	dialog --title "再次确认" --yesno "你将会使用GCC默认的指令集，你确定要这样做吗？" 10 30
 	arch_select=armv4t
 	flag=$?
-	elif [ "$arch_select" != "armv7-m" ] && [ "$arch_select" != "armv4t" ] ;then
+	elif [ "$arch_select" != "armv7-m" ] && [ "$arch_select" != "armv4t" ] && [ "$arch_select" != "armv7-a" ] ;then
 	dialog --title "你可以选择的指令集(目前支持),请输入正确的指令集名称"  --msgbox "$ARCH_VAR" 20 50
 	flag=1
 	fi
@@ -237,6 +237,8 @@ echo 'LD_FLAGS = --gc-sections ' >> $mk_name
 if ! [ "$arch_select" = "x86" ];then
 OBJCOPY_FLAGS='-O binary -S'
 OBJDUMP_FLAGS='-D -m arm'
+CFLAGS="${CFLAGS} -nostdlib"
+ASFLAGS="${ASFLAGS} -nostdlib"
 echo 'OBJCOPY_FLAGS = -O binary -S' >> $mk_name
 echo 'OBJDUMP_FLAGS = -D -m arm' >> $mk_name
 fi
@@ -263,6 +265,15 @@ case "$cpu_select" in
       LD_FLAGS="$LD_FLAGS -T$exe_dir/$cpu_select.lds"
       cp -rf $LDS_BAK/$cpu_select.lds.bak.txt $exe_dir/$cpu_select.lds
       ;;
+  *) 
+    echo "cpu选型有误，与指令集版本不匹配，请重新配置一次。"
+    rm $mk_name
+    exit 0
+    ;;
+esac
+fi
+if [ "$arch_select" = "armv7-a" ];then
+case "$cpu_select" in
   "cortex-a8" )
 	echo "#添加$cpu_select相关标志" >> $mk_name
       echo 'CFLAGS += -march=$(ARCH) -mthumb -mcpu=$(CPU) ' >> $mk_name
