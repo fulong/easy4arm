@@ -27,21 +27,44 @@
 下面的目录树：
 =========================================================
 .
-├── Doxyfile   Doxgen的配置文件
-├── lds_bak 保存着一些链接脚本，根据需要可能要修改
+Doxyfile   Doxgen的配置文件
+lds_bak 保存着一些链接脚本，根据需要可能要修改
+ Makefile            工程的管理文件
+configure.sh  配置configure.mk
+setting.bin  图形界面配置用户宏,但是还没有弄好。
+update.sh   更新configure.mk文件，而不必因小小文件名改变而重新配置configure.mk
+.
+├── Doxyfile
+├── lds_bak
 │   ├── arm920t.lds.bak.txt
 │   ├── cortex-a8.lds.bak.txt
 │   └── cortex-m3.lds.bak.txt
-├── Makefile            工程的管理文件
+├── log
+│   └── other.log
+├── Makefile
 ├── README
+├── start_code
+│   └── cortex-a8
+│       ├── bl1
+│       │   └── start.S
+│       └── bl2
 ├── tools
-│   ├── configure.sh  配置configure.mk
+│   ├── configure.sh
 │   ├── configure_type.sh
 │   ├── install.sh
 │   ├── lib.sh
-│   ├── setting.bin  图形界面配置用户宏,但是还没有弄好。
-│   └── update.sh   更新configure.mk文件，而不必因小小文件名改变而重新配置configure.mk
+│   ├── setting.bin
+│   ├── update.sh
+│   └── update.sh~
 └── tools_src
+    ├── mkimage4a8
+    │   ├── log
+    │   │   └── other.log
+    │   └── mkv210_image.c
     └── setting
+        └── log
+            ├── other.log
+            └── setting.log
 
-4 directories, 12 files
+12 directories, 19 files
+
