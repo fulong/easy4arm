@@ -5,8 +5,8 @@ temp_file=/tmp/cross_configure #暂存文件
 ####################项目的源码目录汇总###################################
 #目录中只包含了没有系统，跟CPU无关的代码目录
 OS_dir="/OS/"
-ARCH_Sum="/cortex-m3 /arm920t" #这个变量表示函数NoARCH_AND_NoOS_Source_Path中消除的文件夹
-extend_src="/tools_src/"
+ARCH_Sum="/cortex-m3 /arm920t /cortex-a8" #这个变量表示函数NoARCH_AND_NoOS_Source_Path中消除的文件夹
+extend_dir="/tools_src/"
 NoARCH_AND_NoOS_Source_Path()
 {
 	sum_dir=$(find $root_dir -type d | grep -v '^\./\.')
@@ -14,7 +14,7 @@ NoARCH_AND_NoOS_Source_Path()
 	Csources=$(find $root_dir |grep -v '^\./\.' | grep '\.c$') # | sed 's/^\..*\///g')
 	Ssources=$(find $root_dir |grep -v '^\./\.' | grep '\.S$') # | sed 's/^\..*\///g')
 if [ "$root_dir" = "." ];then
-	for TEMP in $ARCH_Sum $OS_dir $extend_src
+	for TEMP in $ARCH_Sum $OS_dir $extend_dir
 	do
 		sum_dir=$(echo "$sum_dir" | grep -v "$TEMP")
 		Csources=$(echo "$Csources" | grep -v "$TEMP")
@@ -65,10 +65,10 @@ fi
 }
 #configure.sh
 ######################定义项目名称######################################
-ProjectName()
+ProjectName() 
 {
 	local flag=1 #初始化这个自动变量，使下面的能正确使用这个变量
-	while [ "$flag" != "0" ];do
+	while [ "$flag" != "0"  ];do
 	dialog --clear
 	dialog --title "项目名称" --inputbox "请输入你当前使用项目名称。为空时，会默认为Myarm.\n" 20 50  2> $temp_file
 	
@@ -79,10 +79,7 @@ ProjectName()
 	flag=$?
 	if [ "$flag" = "0" ];then
 	proj_name=Myarm
-	echo "proj_name=$proj_name" > $mk_name
 	fi
-	else 
-	echo "proj_name=$proj_name" > $mk_name
 	fi
 	done
 }

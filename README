@@ -15,11 +15,11 @@
 	ARCH_Sum:
 	1.编译前，运行configure.sh脚本,make configure
 	2.make all 编译与生成可执行文件的结合。
-	(当configure.mk不存在的时候,make会执行make configure的功能，如果存在则make all的功能)
+	(当configure_type.mk不存在的时候,make会执行make configure的功能，如果存在则make all的功能)
 当想清理项目时：
 	1.make clean  是清掉O文件
 	2.make distclean 清掉会自动生成的文件
-	3.make dclean 清除D文件
+	3.make dclean 清除依赖文件
 	4.make allclean clean跟dclean的功能结合
 当项目的文件或名字改变时：
 	使用，make update 来更新文件目录，而不必重新make configure
@@ -27,18 +27,21 @@
 下面的目录树：
 =========================================================
 .
-├── Doxyfile  Doxgen的配置文件
+├── Doxyfile   Doxgen的配置文件
 ├── lds_bak 保存着一些链接脚本，根据需要可能要修改
+│   ├── arm920t.lds.bak.txt
+│   ├── cortex-a8.lds.bak.txt
 │   └── cortex-m3.lds.bak.txt
-├── Makefile 工程的管理文件
+├── Makefile            工程的管理文件
 ├── README
-├── start_code
-│   ├── cortex-m3
-│   │   └── startup_stm32f10x_hd.s
-│   └── mem.inc
-│── tools
-   	├── configure.sh 配置configure.mk
-   ├── lib.sh
-   ├── setting.sh  配置用户宏
-   └── update.sh	更新configure.mk文件，而不必因小小文件名改变而重新配置configure.mk
+├── tools
+│   ├── configure.sh  配置configure.mk
+│   ├── configure_type.sh
+│   ├── install.sh
+│   ├── lib.sh
+│   ├── setting.bin  图形界面配置用户宏,但是还没有弄好。
+│   └── update.sh   更新configure.mk文件，而不必因小小文件名改变而重新配置configure.mk
+└── tools_src
+    └── setting
 
+4 directories, 12 files

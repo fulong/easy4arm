@@ -21,7 +21,11 @@ case "$configure_type" in
 	mk_name=setting.mk
 	ln_install_dir=tools
 		;;
-	"*")
+	"mkimage4a8" )
+	mk_name=mkimage4a8.mk
+	ln_install_dir=tools
+		;;
+		"*")
 	echo "工程状态有误"
 	exit 1
 	;;
@@ -42,7 +46,11 @@ case "$ARCH" in
 	sudo usb2ram ${exe_dir}/${proj_name}\.bin
 	exit 0
 	;;
-	*)
+	"armv7-a")
+	echo "wait!!!"
+	exit 0
+	;;
+		*)
 	echo "ARCH有误。"
 	exit 1
 esac

@@ -8,14 +8,9 @@
 SHELL=/bin/bash
 sinclude configure_type.mk
 
-ifeq "$(configure_type)" "prj_configure"
-sinclude configure.mk
-endif
-ifeq "$(configure_type)" "setting_tools_configure"
-sinclude setting.mk
-endif
+sinclude $(proj_name).mk
 
-ifeq "$(configure_type_mk)$(configure_mk)$(setting_mk)" "YESYES" #判断两个配置文件是否存在.
+ifeq "$(configure_type_mk)$($(proj_name)_mk)" "YESYES" #判断两个配置文件是否存在.
 configure_on=YES
 else
 configure_on=NO
@@ -27,7 +22,7 @@ include_open=$(shell cat ${log_dir}/$(proj_name).log | tail -n1)
 endif
 
 Depend_OBJ=$(OBJ:.o=.d)
-.PHONY:status allclean update configure all clean distclean install setting dclean
+.PHONY:status allclean update configure all clean distclean install setting dclean change2others
 ifeq "$(configure_on)" "YES"
 all:
 	@echo "include_open" >> ${log_dir}/$(proj_name).log
@@ -73,26 +68,31 @@ endif
 	@date >> ${log_dir}/depend.log
 endif #ifeq "$(configure_on)" "YES"
 configure:
-	@./tools/configure_type.sh "$(configure_type_mk)" configure_type\=prj_configure
-ifneq "$(configure_type_mk)$(configure_mk)" "YESYES"
-	@./tools/configure.sh
+ifeq "$($(proj_name)_mk)" ""
+	@./tools/configure_type.sh
+	@./tools/configure.sh "prj_configure"
 endif
 install:
 	@./tools/install.sh configure_type\=$(configure_type) "$(ARCH)"
 	@echo "安装完成" | tee -a ${log_dir}/$(proj_name).log
 	@date >> ${log_dir}/$(proj_name).log
 ifeq "$(configure_on)" "YES"
-update: #这个目标晚点会将其变成能服务于每一个项目
+update: #这个目标可以修复因文件变化，却没及时删除前面依赖于这个文件多出的冗余文件。
 	@echo "更新目录,文件变化" | tee -a ${log_dir}/$(proj_name).log
 	@date >> ${log_dir}/$(proj_name).log 
-	@./tools/update.sh configure_type\=$(configure_type) CPU\=$(CPU)
+	@./tools/update.sh $(proj_name).mk $(configure_type) $(CPU)
 setting:
 	@./tools/setting.bin
-compiling4setting:
-	@./tools/configure_type.sh "$(configure_type_mk)" configure_type\=setting_tools_configure
-ifneq "$(configure_type_mk)$(setting_mk)" "YESYES"
-	@./tools/configure.sh
-endif
+change2others:
+	@cp configure_type.mk type.bak
+	@./tools/configure_type.sh "$(configure_type_mk)"
+	@export `cat configure_type.mk | grep "proj_name="`;if [ -f "$${proj_name}.mk" ];then \
+	rm type.bak;echo "成功改变。";\
+	else mv type.bak configure_type.mk;echo "$${proj_name}.mk文件不存在,改变失败。";\
+	fi
+compilingx:
+	@./tools/configure_type.sh "$(configure_type_mk)"
+	@export `cat configure_type.mk | grep "configure_type="`;./tools/configure.sh $$configure_type
 allclean:clean dclean
 clean :
 	${RM}  ${log_dir}/obj.log ${OBJ} ${exe_dir}/$(proj_name).dis
@@ -107,21 +107,28 @@ distclean:
 	@echo "清除所有自动生成的文件" | tee -a ${log_dir}/other.log
 	@date >> ${log_dir}/other.log
 	@make allclean
+	@cp $(proj_name).mk $(proj_name).bak;
+	 ${RM} $(proj_name).mk
+	 @mktmp=$$(echo -n `ls *.mk | sed  s/configure_type.mk//g`);if ! [ -z "$$mktmp" ];then \
+	./tools/configure_type.sh "YES";\
+	export `cat configure_type.mk | grep "proj_name="`;if [ -f "$${proj_name}.mk" ];then \
+	rm $(proj_name).bak;echo "成功删除$(proj_name)项目。";\
+	else mv $(proj_name).bak $(proj_name).mk;echo "$${proj_name}.mk文件不存在,删除$(proj_name)项目失败。";exit 1;\
+	fi;\
+	 else 	 ${RM} *.mk;\
+	 fi
 	${RM} ${log_dir}/${proj_name}.log
-	-@if [ "${exe_dir}" != "." ] && [ "${exe_dir}" != "" ];then \
-	${RM} ${exe_dir}/;\
+	-@if [ "${exe_dir}" != "${root_dir}" ];then \
+	${RM} ${exe_dir};\
 	fi
 ifeq "$(configure_type)" "prj_configure"
-	${RM}  *.mk *.lds 
+	${RM}   *.lds 
 endif
-ifeq "$(configure_type)" "setting_tools_configure"
-	@./tools/configure_type.sh "$(configure_type_mk)" configure_type\=prj_configure
-endif	
 endif #ifeq "$(configure_on)" "YES"
 
 status:
 ifneq "$(configure_on)" "YES"
-	@echo "configure文件不存在"
+	@echo "configure文件不存在" && exit 1
 endif
 ifeq "$(configure_type)" "prj_configure"
 	@echo "Makefile目前在ARM项目状态中"
@@ -129,6 +136,9 @@ ifeq "$(configure_type)" "prj_configure"
 endif
 ifeq "$(configure_type)" "setting_tools_configure"
 	@echo "Makefile目前在编译linux工具项目状态中(setting.bin)"
+endif
+ifeq "$(configure_type)" "mkimage4a8_configure"
+	@echo "Makefile目前在编译linux工具项目状态中(mkimage4a8.bin)"
 endif
 
 #如果使用了下面语句，makefile将自动重建依赖文件

@@ -2,6 +2,7 @@
 ##################################################################
 # @file : configure.sh
 # @brief: 项目代码最初使用的时候必须先运行这个脚本，配置好编译器，体系结构等等
+# @$1:项目类型
 ######################全局变量######################################
 if ! [ -f "configure_type.mk"  ] ;then
 echo "请正确使用configure.sh."
@@ -14,35 +15,36 @@ arch_select= #指令集选型
 cpu_select= #CPU内核选型
 exe_dir= #可执行文件，与反汇编文件所在
 LDS_BAK=lds_bak #链接脚本备份文件所在的文件夹
-proj_name= #项目的名字
 OS= #选择的RT系统
-use=$(cat  configure_type.mk  | grep "configure_type="| sed 's/.*=//g')
+trap 'rm -rf configure_type.mk;exit 1' INT
 
-case "$use" in
+
+######################全局变量######################################
+source tools/lib.sh
+dialog --title "configure" --msgbox "项目代码最初使用的时候运行的一个脚本，配置好编译环境，体系结构等等" 10 30 
+#导入项目名字
+export `cat configure_type.mk | grep "proj_name="`
+case "$1" in
 	"prj_configure" )
 		root_dir=.
-		mk_name=configure.mk
-		configure_mk=configure_mk
-		log_dir=${root_dir}/log #日志文件所保存的文件夹
-		dialog --title "configure" --msgbox "项目代码最初使用的时候运行的一个脚本，配置好编译环境，体系结构等等" 10 30 
-				;;
+		;;
 	"setting_tools_configure" )
 		root_dir=tools_src/setting
-		mk_name=setting.mk
-		configure_mk=setting_mk
-		log_dir=${root_dir}/log
+		;;
+	"mkimage4a8_configure" )
+		root_dir=tools_src/mkimage4a8
 		;;
 		* )
 		echo "mk文件的名字有误"
-		echo "$use"
+		echo "当前:$1"
 		exit 1
 		;;
 esac
-######################全局变量######################################
+configure_mk=${proj_name}_mk
+mk_name=${proj_name}.mk
+log_dir=${root_dir}/log #日志文件所保存的文件夹
+mkdir -p $log_dir
 
-trap 'rm -rf configure_type.mk;exit 1' INT
-
-source tools/lib.sh
 
 #################交叉编译器版本选择#####################################
 CrossCompiler_Select()
@@ -148,76 +150,60 @@ dir4exe()
 	if [ -z "$exe_dir" ];then
 	dialog --title "再次确认" --yesno "bin文件跟反汇编文件将在根目录上，你确定要这样做吗？" 10 30 
 	flag=$?
-	exe_dir=$root_dir
+	if [ "$flag" = "0" ];then
+		echo "exe_dir=$root_dir" >> $mk_name
+		exe_dir=$root_dir
+	fi
 	else
 	mkdir -p $root_dir/$exe_dir
-	flag=0
-	fi
-	if [ "$flag" = "0" ];then
 	echo "exe_dir=$root_dir/$exe_dir" >> $mk_name
+	exe_dir=$root_dir/$exe_dir
+	flag=0
 	fi
 	done
 }
 ###################生成的bin文件跟反汇编文件所在的路径####################################
-####################自动生成的日志文件文件所在的路径####################################
-#dir4log()
-#{
-	#	local flag=1 #初始化这个自动变量，使下面的能正确使用这个变量
-	#while [ "$flag" != "0" ];do
-	#dialog --title "设置自动生成的日志文件文件所在的路径" --inputbox "自动生成的依赖文件文件所在的路径,格式为:log" 20 50  2> $temp_file
-	#log_dir=$(cat $temp_file)
-	#if [ -z "$log_dir" ];then
-	#dialog --title "再次确认" --yesno "自动生成的依赖文件文件将在根目录上，你确定要这样做吗？" 10 30 
-	#flag=$?
-	#log_dir=.
-	#else
-	#mkdir -p $log_dir
-	#flag=0
-	#fi
-	#if [ "$flag" = "0" ];then
-	#echo "log_dir=$log_dir" >> $mk_name
-	#fi
-	#done
-#}
-####################自动生成的日志文件文件所在的路径####################################
-####################项目是否选用OS###################################
 ####################编译环境配置###################################
-case "$use" in
+case "$1" in
 	"prj_configure" )
-		ProjectName
+		echo "proj_name=$proj_name" > $mk_name
 		CrossCompiler_Select
 		ARCH_Select
 		CPU_Select
 		dir4exe
-		#dir4log
 		echo "log_dir=$log_dir" >> $mk_name
 		mkdir -p $log_dir
-		NoARCH_AND_NoOS_Source_Path
-		OS_Select
-		Source_Path $cpu_select
 		;;
 	"setting_tools_configure" )
-		proj_name=setting
 		CROSS_COMPILER=
 		arch_select=x86
 		cpu_select=x86
-		exe_dir=tools
 		echo "proj_name=$proj_name" > $mk_name
 		echo "CROSS_COMPILER=$CROSS_COMPILER" >> $mk_name
 		echo "ARCH=$arch_select" >> $mk_name
 		echo "CPU=$cpu_select" >> $mk_name
 		dir4exe
 		echo "log_dir=${log_dir}" >> $mk_name
-		NoARCH_AND_NoOS_Source_Path
-		Source_Path $cpu_select
+		;;
+	"mkimage4a8_configure" )
+		CROSS_COMPILER=
+		arch_select=x86
+		cpu_select=x86
+		echo "proj_name=$proj_name" > $mk_name
+		echo "CROSS_COMPILER=$CROSS_COMPILER" >> $mk_name
+		echo "ARCH=$arch_select" >> $mk_name
+		echo "CPU=$cpu_select" >> $mk_name
+		dir4exe
+		echo "log_dir=${log_dir}" >> $mk_name
 		;;
 		* )
-		echo "mk文件的名字有误"
+		echo "项目类型有误"
 		exit 1
 		;;
 esac
-clear
+
 echo "编译环境配置开始"
+sleep 1
 echo "#*******************工具配置*************************************" >> $mk_name
 echo 'CC=$(CROSS_COMPILER)gcc' >> $mk_name
 echo 'LD=$(CROSS_COMPILER)ld' >> $mk_name
@@ -227,6 +213,7 @@ echo 'AS=$(CROSS_COMPILER)gcc' >> $mk_name
 echo "#*******************工具配置*************************************" >> $mk_name
 #*******************工具选项配置******************************************
 echo "配置工具的选项"
+sleep 1
 CFLAGS='-c -Wall -ffunction-sections '
 ASFLAGS='-c -Wall -ffunction-sections'
 LD_FLAGS='--gc-sections '
@@ -326,7 +313,16 @@ touch $log_dir/${proj_name}.log
 fi
 ########################################
 echo "RM=rm -rf">> $mk_name
-
+echo "root_dir=$root_dir">> $mk_name
+#*******************项目源码生成******************************************
+NoARCH_AND_NoOS_Source_Path
+Source_Path $cpu_select
+####################项目是否选用OS###################################
+OS_Select
+####################项目是否选用OS###################################
+#******************项目源码生成*******************************************
+#*******************项目源码生成******************************************
+clear
 echo "配置完成。"
 echo "项目名称：$proj_name"
 echo "指令集:$arch_select"
