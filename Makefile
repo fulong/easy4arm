@@ -110,7 +110,7 @@ distclean:
 	@cp $(proj_name).mk $(proj_name).bak;
 	 ${RM} $(proj_name).mk
 	@mktmp=$$(echo -n `ls *.mk | sed  s/configure_type.mk//g`);if ! [ -z "$$mktmp" ];then \
-	cp configure_type.mk configure_type.bak;./tools/configure_type.sh "YES";\
+	cp configure_type.mk configure_type.bak;./tools/configure_type.sh "YES" "$$mktmp" $(proj_name_bak);\
 	export `cat configure_type.mk | grep "proj_name="`;if [ -f "$${proj_name}.mk" ];then \
 	${RM} $(proj_name).bak;${RM} configure_type.bak;echo "成功删除$(proj_name)项目。";\
 	else mv configure_type.bak configure_type.mk;mv $(proj_name).bak $(proj_name).mk;echo "$${proj_name}.mk文件不存在,删除$(proj_name)项目失败。";exit 1;\
