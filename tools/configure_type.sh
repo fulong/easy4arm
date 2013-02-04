@@ -20,7 +20,7 @@ proj_Select()
 	while [ "$flag" != "0" ];do
 	dialog --clear
 if [ "$1" == "YES" ];then
-	dialog --title "项目类型选择" --inputbox "请输入你当前使用的项目名称。你可以选择的指令集(目前支持).\n$proj_VAR" 20 50  2> $temp_file
+	dialog --title "项目类型选择" --inputbox "请输入你当前使用的项目名称。你可以选择的项目名称如下(目前支持).\n$proj_VAR" 20 50  2> $temp_file
 	proj_select=$(cat $temp_file)
 fi
 	case $proj_select in
