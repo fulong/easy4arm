@@ -73,14 +73,14 @@ ifeq "$($(proj_name)_mk)" ""
 	@./tools/configure.sh "prj_configure"
 endif
 install:
-	@./tools/install.sh configure_type\=$(configure_type) "$(ARCH)"
+	@./tools/install.sh $(proj_name) "$(ARCH)" $(proj_name_bak)
 	@echo "安装完成" | tee -a ${log_dir}/$(proj_name).log
 	@date >> ${log_dir}/$(proj_name).log
 ifeq "$(configure_on)" "YES"
 update: #这个目标可以修复因文件变化，却没及时删除前面依赖于这个文件多出的冗余文件。
 	@echo "更新目录,文件变化" | tee -a ${log_dir}/$(proj_name).log
 	@date >> ${log_dir}/$(proj_name).log 
-	@./tools/update.sh $(proj_name).mk $(configure_type) $(CPU)
+	@./tools/update.sh $(proj_name).mk $(root_dir) $(CPU)
 setting:
 	@./tools/setting.bin
 change2others:
@@ -122,7 +122,7 @@ distclean:
 	${RM} ${exe_dir};\
 	fi
 ifeq "$(configure_type)" "prj_configure"
-	${RM}   *.lds 
+	${RM}   *.lds *.bin
 endif
 endif #ifeq "$(configure_on)" "YES"
 

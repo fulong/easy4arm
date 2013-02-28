@@ -2,44 +2,26 @@
 # @parm $1,传递的是工程目前使用的MK文件。
 # @parm $2,传递的是工程目前的类型。
 mk_name=$1
-configure_type=$2
 cpu_select=$3
-root_dir=
+root_dir=$2
 source tools/lib.sh
 #update_item_order="VPATH Csources Ssources"
 if [  "$1" == ".mk" ] || [ -z "$2" ] || [ -z "$3" ] ;then
 	echo "MK配置不对，请重建。"
 	exit 1
 fi
-case "$configure_type" in
-	"prj_configure" )
-	root_dir=.
-	;;
-	"setting_tools_configure" )
-	root_dir=tools_src/setting
-	;;
-	"mkimage4a8_configure" )
-	root_dir=tools_src/mkimage4a8
-	;;
-		"*")
-	echo "工程状态有误"
-	exit 1
-	;;
-esac
 
 clear_file()
 {
 echo "删除更新前生成的.d,.o文件"
 local Dependent_tmp
 local Object_tmp
-Dependent_tmp=$(find $root_dir  | grep '\.d$')
-Object_tmp=$(find $root_dir  | grep '\.o$' )
 if [ "$root_dir" == "." ];then
-	echo $Dependent_tmp | grep -v "$extend_dir"  |  xargs rm -f
-	echo $Object_tmp | grep -v "$extend_dir" |  xargs rm -f
+	find $root_dir  | grep '\.d$' | grep -v "$extend_dir" |  xargs rm -f
+	find $root_dir  | grep '\.o$' | grep -v "$extend_dir" |  xargs rm -f
 else
-	echo $Dependent_tmp  |  xargs rm -f
-	echo $Object_tmp  |  xargs rm -f
+	find $root_dir  | grep '\.d$' |  xargs rm -f
+	find $root_dir  | grep '\.o$' |  xargs rm -f
 fi
 }
 #item_update() 

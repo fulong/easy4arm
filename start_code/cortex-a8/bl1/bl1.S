@@ -29,12 +29,26 @@ _start:
 	ldr r1, =0xE0200060
 	ldr r0, =0x00011000
 	str r0, [r1]
-
+	ldr r2,=0xFFFF00
+star
 led_blink:
 	// 设置GPC0DAT的bit[3:4]，使GPC0_3/4引脚输出低电平，LED亮
 	ldr r1, =0xE0200064
 	mov r0, #0x18
 	str r0, [r1]
+
+	bl delay
+	ldr r1, =0xE0200064
+	mov r0, #0x00
+	str r0, [r1]
+	bl delay
+	b led_blink
+
+delay:
+	sub r2,r2,#1
+	cmp r2,#0
+	bne delay
+	ldr r2,=0xFFFF00
+	mov pc,lr
 halt:
 	b halt
-
