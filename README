@@ -39,32 +39,23 @@ update.sh   更新configure.mk文件，而不必因小小文件名改变而重�
 │   ├── arm920t.lds.bak.txt
 │   ├── cortex-a8.lds.bak.txt
 │   └── cortex-m3.lds.bak.txt
-├── log
-│   └── other.log
 ├── Makefile
 ├── README
 ├── start_code
 │   └── cortex-a8
-│       ├── bl1
-│       │   └── start.S
-│       └── bl2
+│       └── bl1
+│           └── bl1.S
 ├── tools
 │   ├── configure.sh
 │   ├── configure_type.sh
 │   ├── install.sh
 │   ├── lib.sh
 │   ├── setting.bin
-│   ├── update.sh
-│   └── update.sh~
+│   └── update.sh
 └── tools_src
     ├── mkimage4a8
-    │   ├── log
-    │   │   └── other.log
-    │   └── mkv210_image.c
+    │  └── mkv210_image.c
     └── setting
         └── log
             ├── other.log
             └── setting.log
-
-12 directories, 19 files
-
