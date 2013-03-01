@@ -41,11 +41,11 @@
         <P>vrapper :   <a href="http://vrapper.sourceforge.net/update-site/stable">http://vrapper.sourceforge.net/update-site/stable</a> (eclipse 的一个中 vim 插件)</P>
         <P>zylin   :   <a href="http://opensource.zylin.com/zylincdt">http://opensource.zylin.com/zylincdt</a></p>
 
-<P>使用方法：
-<P>  tools/lib.sh中的两个变量：
+<P><a href="https://github.com/fulong/easy4arm/blob/master/Makefile">makefile</a>使用方法：
+<P>  tools/<a href="https://github.com/fulong/easy4arm/blob/master/tools/lib.sh">lib.sh</a>中的两个变量：
 <P>  OS_dir:如果OS的文件夹名字变化了，应该改变这个变量的值
 <P>  ARCH_Sum:
-<P>  1.编译前，运行configure.sh脚本,make configure
+<P>  1.编译前，运行<a href="https://github.com/fulong/easy4arm/blob/master/tools/configure.sh">configure.sh</a>脚本,make configure
 <P>  2.make all 编译与生成可执行文件的结合。
 <P>  (当configure_type.mk不存在的时候,make会执行make configure的功能，如果存在则make all的功能)
 <P>当想清理项目时：
@@ -65,13 +65,13 @@
 <p>当所有的代码编译完成后
 <p>		需要运行make install，才会保存在目标文件夹中。
 <P>下面是文件，目录说明：
-<P>Doxyfile          Doxgen的配置文件，在根目录
-<P>lds_bak             这个目录保存着一些链接脚本，根据需要可能要修改，脚本根据cpu内核命名的
-<P>Makefile               工程的管理文件，利用工具文件夹中的工具进行配置，修改，更新项目
-<P>configure.sh        配置configure.mk，在tool文件夹中
+<P><a href="https://github.com/fulong/easy4arm/blob/master/Doxyfile">Doxyfile</a>          Doxgen的配置文件，在根目录
+<P><a href="https://github.com/fulong/easy4arm/tree/master/lds_bak">lds_bak</a>             这个目录保存着一些链接脚本，根据需要可能要修改，脚本根据cpu内核命名的
+<P><a href="https://github.com/fulong/easy4arm/blob/master/Makefile">makefile</a>               工程的管理文件，利用工具文件夹中的工具进行配置，修改，更新项目
+<P><a href="https://github.com/fulong/easy4arm/blob/master/tools/configure.sh">configure.sh</a>        配置configure.mk，在tool文件夹中
 <P>setting.bin         图形界面配置用户宏,但是还没有弄好，文件在tool文件夹中，他的源代码在tool_src文件夹中的setting
-<P>update.sh         更新mk文件，而不必因小小文件名改变而重新配置mk，主要用在更新源码文件。文件在tool文件夹中
-<P>install.sh          这个脚本是用来安装用的，根据不同项目性质进行安装，如，setting的linux项目，就安装到tool文件夹那里。此文件在tool文件夹中
+<P><a href="https://github.com/fulong/easy4arm/blob/master/tools/update.sh">update.sh</a>         更新mk文件，而不必因小小文件名改变而重新配置mk，主要用在更新源码文件。文件在tool文件夹中
+<P><a href="https://github.com/fulong/easy4arm/blob/master/tools/install.sh">install.sh</a>          这个脚本是用来安装用的，根据不同项目性质进行安装，如，setting的linux项目，就安装到tool文件夹那里。此文件在tool文件夹中
 
       </section>
       <footer>
