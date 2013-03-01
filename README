@@ -22,40 +22,12 @@
 	3.make dclean 清除依赖文件
 	4.make allclean clean跟dclean的功能结合
 当项目的文件或名字改变时：
-	使用，make update 来更新文件目录，而不必重新make configure
-=========================================================
-下面的目录树：
-=========================================================
-.
-Doxyfile   Doxgen的配置文件
-lds_bak 保存着一些链接脚本，根据需要可能要修改
- Makefile            工程的管理文件
-configure.sh  配置configure.mk
-setting.bin  图形界面配置用户宏,但是还没有弄好。
-update.sh   更新configure.mk文件，而不必因小小文件名改变而重新配置configure.mk
-.
-├── Doxyfile
-├── lds_bak
-│   ├── arm920t.lds.bak.txt
-│   ├── cortex-a8.lds.bak.txt
-│   └── cortex-m3.lds.bak.txt
-├── Makefile
-├── README
-├── start_code
-│   └── cortex-a8
-│       └── bl1
-│           └── bl1.S
-├── tools
-│   ├── configure.sh
-│   ├── configure_type.sh
-│   ├── install.sh
-│   ├── lib.sh
-│   ├── setting.bin
-│   └── update.sh
-└── tools_src
-    ├── mkimage4a8
-    │  └── mkv210_image.c
-    └── setting
-        └── log
-            ├── other.log
-            └── setting.log
+	使用make update 来更新文件目录，而不必重新make configure
+下面是文件，目录说明：
+Doxyfile   				Doxgen的配置文件，在根目录
+lds_bak   					这个目录保存着一些链接脚本，根据需要可能要修改，脚本根据cpu内核命名的
+ Makefile            		工程的管理文件，利用工具文件夹中的工具进行配置，修改，更新项目
+configure.sh  			配置configure.mk，在tool文件夹中
+setting.bin 			 	图形界面配置用户宏,但是还没有弄好，文件在tool文件夹中，他的源代码在tool_src文件夹中的setting
+update.sh   			更新mk文件，而不必因小小文件名改变而重新配置mk，主要用在更新源码文件。文件在tool文件夹中
+install.sh					这个脚本是用来安装用的，根据不同项目性质进行安装，如，setting的linux项目，就安装到tool文件夹那里。此文件在tool文件夹中
