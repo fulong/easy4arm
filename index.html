@@ -30,116 +30,68 @@
 
       </header>
       <section>
-        <p>使用环境：
-    OS：Fedora 17
-    IDE:Eclipse 4.2
-    CORSS_COMPILER 1.arm-none-eabi
-                   2.arm-uclinuxeabi
-    Eclipse plugin:Update Site
+        <p>使用环境：</P>
+    <P>OS：mint 14</P>
+    <P>IDE:Eclipse 4.2</P>
+    <P>CORSS_COMPILER 1.arm-none-eabi</P>
+    <P>               2.arm-uclinuxeabi</P>
+    <P>Eclipse plugin:Update Site</P>
         <P>git     :   <a href="http://download.eclipse.org/egit/update">http://download.eclipse.org/egit/update</a></P>
         <P>arm     :   <a href="http://gnuarmeclipse.sourceforge.net/updates">http://gnuarmeclipse.sourceforge.net/updates</a></P>
         <P>vrapper :   <a href="http://vrapper.sourceforge.net/update-site/stable">http://vrapper.sourceforge.net/update-site/stable</a> (eclipse 的一个中 vim 插件)</P>
         <P>zylin   :   <a href="http://opensource.zylin.com/zylincdt">http://opensource.zylin.com/zylincdt</a></p>
 
-<p>使用方法：
-    tools/lib.sh中的两个变量：
-    OS_dir:如果OS的文件夹名字变化了，应该改变这个变量的值
-    ARCH_Sum:
-    1.编译前，运行configure.sh脚本,make configure
-    2.make all 编译与生成可执行文件的结合。
-    (当configure.mk不存在的时候,make会执行make configure的功能，如果存在则make all的功能)
-当想清理项目时：
-    1.make clean  是清掉O文件
-    2.make distclean 清掉会自动生成的文件
-    3.make dclean 清除D文件
-    4.make allclean clean跟dclean的功能结合
-当项目的文件或名字改变时：</p>
+<p>使用方法：</P>
+    <P>tools/lib.sh中的两个变量：</P>
+    <P>OS_dir:如果OS的文件夹名字变化了，应该改变这个变量的值</P>
+    <P>ARCH_Sum:</P>
+    <P>1.编译前，运行configure.sh脚本,make configure</P>
+    <P>2.make all 编译与生成可执行文件的结合。</P>
+    <P>(当configure.mk不存在的时候,make会执行make configure的功能，如果存在则make all的功能)</P>
+<P>当想清理项目时：</P>
+    <P>1.make clean  是清掉O文件</P>
+    <P>2.make distclean 清掉会自动生成的文件</P>
+    <P>3.make dclean 清除D文件</P>
+    <P>4.make allclean clean跟dclean的功能结合</P>
+<P>当项目的文件或名字改变时：
+使用，make update 来更新文件目录，而不必重新make configure</p>
 
-<h1>    使用，make update 来更新文件目录，而不必重新make configure</h1>
-
+<P>=========================================================</P>
 <h1>下面的目录树：</h1>
-
-<p>.
-├── chip  写着基本的芯片驱动
-│   ├── font_image.h
-│   ├── ssd1963.c
-│   ├── ssd1963.h
-│   ├── tsc2046.c
-│   └── tsc2046.h
-├── cpu
-│   └── cortex-m3
-│       └── stm32f103 标准化的文件夹，可以不用修改
-│           ├── CoreSupport
-│           │   ├── core_cm3.c
-│           │   └── core_cm3.h
-│           └── STM32F10x
-│               ├── stm32f10x.h
-│               ├── system_stm32f10x.c
-│               └── system_stm32f10x.h
-├── Doxyfile  Doxgen的配置文件
-├── lds_bak 保存着一些链接脚本，根据需要可能要修改
-│   └── cortex-m3.lds.bak.txt
-├── libc 一些与cpu无关的，但有经常用到的库文件
-│   ├── cpu_typed.h
-│   ├── font.c
-│   ├── font.h
-│   ├── libmath.c
-│   ├── libmath.h
-│   ├── string.c
-│   └── string.h
-├── Makefile 工程的管理文件
-├── OS
-│   └── ucos-ii
-├── package 这个的存在是为了将功能层与驱动层区分起来
-│   ├── tft.c
-│   ├── tft.h
-│   ├── usart_package.c
-│   └── usart_package.h
-├── protocol 一些基础的协议
-│   ├── cortex-m3
-│   │   └── inc
-│   │       └── spi.h
-│   └── spi.c
-├── README
-├── start_code
-│   ├── cortex-m3
-│   │   └── startup_stm32f10x_hd.s
-│   └── mem.inc
-├── sysdev 写着关于cpu基本的内置功能驱动
-│   ├── cortex-m3
-│   │   ├── inc
-│   │   │   ├── fsmc.h
-│   │   │   ├── gpio.h
-│   │   │   ├── interrupt.h
-│   │   │   ├── led.h
-│   │   │   ├── rcc.h
-│   │   │   ├── sys.h
-│   │   │   ├── systick.h
-│   │   │   ├── touch.h
-│   │   │   └── usart.h
-│   │   └── src
-│   │       ├── fsmc.c
-│   │       ├── rcc.c
-│   │       └── systick.c
-│   └── general 通用设备函数
-│       ├── gpio.c
-│       ├── init_main.c
-│       ├── interrupt.c
-│       ├── led.c
-│       ├── touch.c
-│       └── usart.c
-├── tools
-│   ├── configure.sh 配置configure.mk
-│   ├── lib.sh
-│   ├── setting.sh  配置用户宏
-│   └── update.sh 更新configure.mk文件，而不必因小小文件名改变而重新配置configure.mk
-└── user  用户的应用层代码，包括一些用户配置
-    ├── main.c
-    └── user_configure
-        ├── configure.h 里面有很多宏开关
-        └── include.h</p>
-
-<p>24 directories, 55 files</p>
+<P>=========================================================</P>
+<P>Doxyfile   Doxgen的配置文件
+<P>lds_bak 保存着一些链接脚本，根据需要可能要修改
+<P>Makefile            工程的管理文件
+<P>configure.sh  配置configure.mk
+<P>setting.bin  图形界面配置用户宏,但是还没有弄好。
+<P>update.sh   更新configure.mk文件，而不必因小小文件名改变而重新配置configure.mk
+<P>.
+<P>├── Doxyfile
+<P>├── lds_bak
+<P>│   ├── arm920t.lds.bak.txt
+<P>│   ├── cortex-a8.lds.bak.txt
+<P>│   └── cortex-m3.lds.bak.txt
+<P>├── Makefile
+<P>├── README
+<P>├── start_code
+<P>│   └── cortex-a8
+<P>│       └── bl1
+<P>│           └── bl1.S
+<P>├── tools
+<P>│   ├── configure.sh
+<P>│   ├── configure_type.sh
+<P>│   ├── install.sh
+<P>│   ├── lib.sh
+<P>│   ├── setting.bin
+<P>│   └── update.sh
+<P>└── tools_src
+<P>   ├── mkimage4a8
+<P>   │  └── mkv210_image.c
+<P>   └── setting
+<P>      └── log
+<P>          ├── other.log
+<P>          └── setting.log
+<P>
       </section>
       <footer>
         <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
