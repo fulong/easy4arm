@@ -1,5 +1,5 @@
 使用环境：
-	OS：Fedora 18
+	OS：mint
 	IDE:Eclipse 4.2
 	CORSS_COMPILER 1.arm-none-eabi
 				   2.arm-uclinuxeabi
@@ -8,26 +8,5 @@
 		arm		:  	http://gnuarmeclipse.sourceforge.net/updates
 		vrapper	:	http://vrapper.sourceforge.net/update-site/stable (eclipse 的一个中 vim 插件)
 		zylin	:	http://opensource.zylin.com/zylincdt
-		
-使用方法：
-	tools/lib.sh中的两个变量：
-	OS_dir:如果OS的文件夹名字变化了，应该改变这个变量的值
-	ARCH_Sum:
-	1.编译前，运行configure.sh脚本,make configure
-	2.make all 编译与生成可执行文件的结合。
-	(当configure_type.mk不存在的时候,make会执行make configure的功能，如果存在则make all的功能)
-当想清理项目时：
-	1.make clean  是清掉O文件
-	2.make distclean 清掉会自动生成的文件
-	3.make dclean 清除依赖文件
-	4.make allclean clean跟dclean的功能结合
-当项目的文件或名字改变时：
-	使用make update 来更新文件目录，而不必重新make configure
-下面是文件，目录说明：
-Doxyfile   				Doxgen的配置文件，在根目录
-lds_bak   					这个目录保存着一些链接脚本，根据需要可能要修改，脚本根据cpu内核命名的
- Makefile            		工程的管理文件，利用工具文件夹中的工具进行配置，修改，更新项目
-configure.sh  			配置configure.mk，在tool文件夹中
-setting.bin 			 	图形界面配置用户宏,但是还没有弄好，文件在tool文件夹中，他的源代码在tool_src文件夹中的setting
-update.sh   			更新mk文件，而不必因小小文件名改变而重新配置mk，主要用在更新源码文件。文件在tool文件夹中
-install.sh					这个脚本是用来安装用的，根据不同项目性质进行安装，如，setting的linux项目，就安装到tool文件夹那里。此文件在tool文件夹中
+更详细的请看
+http://fulong.github.com/easy4arm/

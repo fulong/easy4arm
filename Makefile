@@ -115,7 +115,7 @@ distclean:
 	${RM} $(proj_name).bak;${RM} configure_type.bak;echo "成功删除$(proj_name)项目。";\
 	else mv configure_type.bak configure_type.mk;mv $(proj_name).bak $(proj_name).mk;echo "$${proj_name}.mk文件不存在,删除$(proj_name)项目失败。";exit 1;\
 	fi;\
-	 else 	 ${RM} *.mk;${RM} $(proj_name).bak;\
+	 else 	 ${RM} *.mk;${RM} $(proj_name).bak;${RM} ./tools/*.bin;\
 	 fi
 	${RM} ${log_dir}/${proj_name}.log
 	-@if [ "${exe_dir}" != "${root_dir}" ];then \
