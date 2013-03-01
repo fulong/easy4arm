@@ -50,11 +50,20 @@
 <P>  (当configure_type.mk不存在的时候,make会执行make configure的功能，如果存在则make all的功能)
 <P>当想清理项目时：
 <P>  1.make clean  是清掉O文件
-<P>  2.make distclean 清掉会自动生成的文件
+<P>  2.make distclean 清掉会自动生成的文件，只清除当前项目类型中的，如果还有其他的没清除，会询问改变成为哪里项目类型，如果整个工程只剩下一个则直接转变。
 <P>  3.make dclean 清除依赖文件
 <P>  4.make allclean clean跟dclean的功能结合
+<P>除了distclean可以改变类型，其他的清除目标，都没有这一功能</P>
+<P>当要改变项目类型的时候：</P>
+<P>  1.make compilex 出现一个界面，是选择项目中要编译的项目名称，这些项目都是工具或者arm来命名的</P>
+<P>  2.make change2others 出现一个界面，是选择要当前项目类型改变为需要的项目中要的项目名称</P> 
 <P>当项目的文件或名字改变时：
 <P>  使用make update 来更新文件目录，而不必重新make configure
+<P>当不知道当前项目要求的源码对应的项目，可以有两种方法查询</P>
+<p>		1.如果configure_type.mk文件存在，可以查询这个。这个文件是通过make configure自动生成
+<p>		2.使用make status查询。
+<p>当所有的代码编译完成后
+<p>		需要运行make install，才会保存在目标文件夹中。
 <P>下面是文件，目录说明：
 <P>Doxyfile          Doxgen的配置文件，在根目录
 <P>lds_bak             这个目录保存着一些链接脚本，根据需要可能要修改，脚本根据cpu内核命名的
