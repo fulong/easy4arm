@@ -1,37 +1,5 @@
 <!DOCTYPE html>
 <html>
-<!-- Put the following javascript before the closing </head> tag. -->
-  
-<script>
-  (function() {
-    var cx = '004333448583342162161:k9p15j7igpi';
-    var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
-    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
-        '//www.google.com/cse/cse.js?cx=' + cx;
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
-  })();
-</script>
-<!-- Place this tag where you want the search box to render -->
-<gcse:searchbox-only></gcse:searchbox-only>
-<div id="cse-search-form" style="width: 100%;">Loading</div>
-<script src="http://www.google.com/jsapi" type="text/javascript"></script>
-<script type="text/javascript"> 
-  google.load('search', '1', {language : 'zh-CN', style : google.loader.themes.BUBBLEGUM});
-  google.setOnLoadCallback(function() {
-    var customSearchOptions = {};
-    var orderByOptions = {};
-    orderByOptions['keys'] = [{label: 'Relevance', key: ''},{label: 'Date', key: 'date'}];
-    customSearchOptions['enableOrderBy'] = true;
-    customSearchOptions['orderByOptions'] = orderByOptions;  var customSearchControl = new google.search.CustomSearchControl(
-      '004333448583342162161:k9p15j7igpi', customSearchOptions);
-    customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
-    var options = new google.search.DrawOptions();
-    options.setAutoComplete(true);
-    options.enableSearchboxOnly("http://www.google.com/cse?cx=004333448583342162161:k9p15j7igpi");
-    customSearchControl.draw('cse-search-form', options);
-  }, true);
-</script>
-
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
@@ -56,7 +24,6 @@
         </section>
       </div>
     </header>
-    
     <div class="container">
       <section id="main_content">
         <h3>Welcome to GitHub Pages,and <a href="myhtml4easy4arm/index.html">introduce</a> of easy4arm</h3>
