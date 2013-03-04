@@ -11,77 +11,81 @@
         </title>
     </head>
     <body>
-                <a href="index.html">返回目录</a>
-                <p>
+        <header>
+            <div>
+                <h1>
                     <a href="https://github.com/fulong/easy4arm/blob/master/Makefile">makefile</a>使用方法：
-                </p>
-                <p>
-                    tools/<a href="https://github.com/fulong/easy4arm/blob/master/tools/lib.sh">lib.sh</a>中的两个变量：
-                </p>
-                <p>
-                    OS_dir:如果OS的文件夹名字变化了，应该改变这个变量的值
-                </p>
-                <p>
-                    ARCH_Sum:
-                </p>
-                <p>
-                    1.编译前，运行<a href="https://github.com/fulong/easy4arm/blob/master/tools/configure.sh">configure.sh</a>脚本,make configure
-                </p>
-                <p>
-                    2.make all 编译与生成可执行文件的结合。
-                </p>
-                <p>
-                    (当configure_type.mk不存在的时候,make会执行make configure的功能，如果存在则make all的功能)
-                </p>
-                <p>
-                    当想清理项目时：
-                </p>
-                <p>
-                    1.make clean 是清掉O文件
-                </p>
-                <p>
-                    2.make distclean 清掉会自动生成的文件，只清除当前项目类型中的，如果还有其他的没清除，会询问改变成为哪里项目类型，如果整个工程只剩下一个则直接转变。
-                </p>
-                <p>
-                    3.make dclean 清除依赖文件
-                </p>
-                <p>
-                    4.make allclean clean跟dclean的功能结合
-                </p>
-                <p>
-                    除了distclean可以改变类型，其他的清除目标，都没有这一功能
-                </p>
-                <p>
-                    当要改变项目类型的时候：
-                </p>
-                <p>
-                    1.make compilex 出现一个界面，是选择项目中要编译的项目名称，这些项目都是工具或者arm来命名的
-                </p>
-                <p>
-                    2.make change2others 出现一个界面，是选择要当前项目类型改变为需要的项目中要的项目名称
-                </p>
-                <p>
-                    当项目的文件或名字改变时：
-                </p>
-                <p>
-                    使用make update 来更新文件目录，而不必重新make configure
-                </p>
-                <p>
-                    当不知道当前项目要求的源码对应的项目，可以有两种方法查询
-                </p>
-                <p>
-                    1.如果configure_type.mk文件存在，可以查询这个。这个文件是通过make configure自动生成
-                </p>
-                <p>
-                    2.使用make status查询。
-                </p>
-                <p>
-                    当所有的代码编译完成后
-                </p>
-                <p>
-                    需要运行make install，才会保存在目标文件夹中。
-                </p>
-            </section>
-        </div>
+                </h1>
+                <a href="index.html">返回目录</a>
+        </header>
+        <p>
+            tools/<a href="https://github.com/fulong/easy4arm/blob/master/tools/lib.sh">lib.sh</a>中的两个变量：
+        </p>
+        <pre>
+<code>
+<!--                    -->OS_dir:如果OS的文件夹名字变化了，应该改变这个变量的值
+<!--                    -->ARCH_Sum:如果CPU的结构多了，应该改变这个变量，增加你增加的架构名称
+<!--                    --></code>
+</pre>
+        <h3>
+            一般方法
+        </h3>
+        <p>
+            1.编译前，运行<a href="https://github.com/fulong/easy4arm/blob/master/tools/configure.sh">configure.sh</a>脚本,make configure
+        </p>
+        <p>
+            2.make all 编译与生成可执行文件的结合。
+        </p>
+        <p>
+            (当configure_type.mk或者其他项目的mk文件不存在的时候,make会执行make configure的功能，如果存在则make all的功能)
+        </p>
+        <h3>
+            当想清理项目时：
+        </h3>
+        <p>
+            1.make clean 是清掉O文件
+        </p>
+        <p>
+            2.make distclean 清掉会自动生成的文件，只清除当前项目类型中的，如果还有其他的没清除，会询问改变成为哪里项目类型，如果整个工程只剩下一个则直接转变。
+        </p>
+        <p>
+            3.make dclean 清除依赖文件
+        </p>
+        <p>
+            4.make allclean clean跟dclean的功能结合
+        </p>
+        <p>
+            除了distclean可以改变类型，其他的清除目标，都没有这一功能
+        </p>
+        <h3>
+            当要改变项目类型的时候：
+        </h3>
+        <p>
+            1.make compilex 出现一个界面，是选择项目中要编译的项目名称，这些项目都是工具或者arm来命名的
+        </p>
+        <p>
+            2.make change2others 出现一个界面，是选择要当前项目类型改变为需要的项目中要的项目名称
+        </p>
+        <h3>
+            当项目的文件或名字改变时：
+        </h3>
+        <p>
+            使用make update 来更新文件目录，而不必重新make configure
+        </p>
+        <h3>
+            当不知道当前项目要求的源码对应的项目，可以有两种方法查询
+        </h3>
+        <p>
+            1.如果configure_type.mk文件存在，可以查询这个。这个文件是通过make configure自动生成
+        </p>
+        <p>
+            2.使用make status查询。
+        </p>
+        <h3>
+            当所有的代码编译完成后
+        </h3>
+        <p>
+            需要运行make install，才会保存在目标文件夹中。
+        </p>
     </body>
 </html>
