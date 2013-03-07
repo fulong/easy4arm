@@ -22,16 +22,25 @@
         <div class="container">
             <section id="main_content">
                  <p>
-                    <a href="https://github.com/fulong/easy4arm/blob/master/tools/configure.sh">configure.sh</a> 配置mk，在tool文件夹中
+                    <a href="https://github.com/fulong/easy4arm/blob/master/tools/configure.sh">configure.sh</a> 配置<a href="explaination_of_name/index.html">mk文件</a>，在tool文件夹中
                 </p>
                 <p>
-                    setting.bin 图形界面配置用户宏,但是还没有弄好，文件在tool文件夹中，他的源代码在tool_src文件夹中的setting,当新git clone下来的项目中，这个文件不会并不存在，只能利用makefile的功能重新编译一次产生这个文件
+                    setting.bin 图形界面配置用户宏,但是还没有弄好，文件在tool文件夹中，他的源代码在tool_src文件夹中的setting,当新git clone下来的项目中，这个文件不会并不存在，只能利用makefile的功能重新编译一次产生这个文件.假设已经编译好并且用make install后，不要使用make distclean，因为它会删除当前编译项目的所有生成的文件，所以要转变项目名称.这个文件要用make install才会出现在tool文件夹中
                 </p>
                 <p>
-                    <a href="https://github.com/fulong/easy4arm/blob/master/tools/update.sh">update.sh</a> 更新mk文件，而不必因小小文件名改变而重新配置mk，主要用在更新源码文件。文件在tool文件夹中
+                    mkimages4a8.bin 文件在tool文件夹中，他的源代码在tool_src文件夹中的mkimages4a8,当新git clone下来的项目中，这个文件不会并不存在，只能利用makefile的功能重新编译一次产生这个文件.假设已经编译好并且用make install后，不要使用make distclean，因为它会删除当前编译项目的所有生成的文件，所以要转变<a href="explaination_of_name/index.html">项目名称</a>.这个文件要用make install才会出现在tool文件夹中
+                </p>
+                <p>
+                    <a href="https://github.com/fulong/easy4arm/blob/master/tools/update.sh">update.sh</a> 更新mk文件，而不必因小小文件名改变而重新配置mk文件，主要用在更新源码文件。文件在tool文件夹中
                 </p>
                 <p>
                     <a href="https://github.com/fulong/easy4arm/blob/master/tools/install.sh">install.sh</a> 这个脚本是用来安装用的，根据不同项目性质进行安装，如，setting的linux项目，就安装到tool文件夹那里。此文件在tool文件夹中
+                </p>
+                <p>
+                    <a href="https://github.com/fulong/easy4arm/blob/master/tools/configure_type.sh">configure_type.sh</a> 这个脚本是用来生成configure_type.mk的脚本。此文件在tool文件夹中
+                </p>
+                <p>
+                    <a href="https://github.com/fulong/easy4arm/blob/master/tools/lib.sh">lib.sh</a> 这个是库脚本，给其他脚本复用的。此文件在tool文件夹中
                 </p>
  
             </section>
