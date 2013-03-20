@@ -97,9 +97,9 @@
 	<g id="gnuplot_plot_1" ><title>gnuplot_plot_1</title>
 <g style="fill:none; color:red; stroke:currentColor; stroke-width:1.00; stroke-linecap:butt; stroke-linejoin:miter">
 	<g style = 'stroke:none; shape-rendering:crispEdges'>
-		<polygon fill = 'currentColor' points = '106.2,463.4 191.6,463.4 191.6,280.1 106.2,280.1 '/>
+		<polygon fill = 'currentColor' points = '106.2,463.4 191.6,463.4 191.6,274.2 106.2,274.2 '/>
 	</g>
-	<path  d='M106.2,463.4 L106.2,280.2 L191.5,280.2 L191.5,463.4 L106.2,463.4 Z  h0.01'/>	<g style = 'stroke:none; shape-rendering:crispEdges'>
+	<path  d='M106.2,463.4 L106.2,274.3 L191.5,274.3 L191.5,463.4 L106.2,463.4 Z  h0.01'/>	<g style = 'stroke:none; shape-rendering:crispEdges'>
 		<polygon fill = 'currentColor' points = '276.7,463.4 362.0,463.4 362.0,416.0 276.7,416.0 '/>
 	</g>
 	<path  d='M276.7,463.4 L276.7,416.1 L361.9,416.1 L361.9,463.4 L276.7,463.4 Z  h0.01'/>	<g style = 'stroke:none; shape-rendering:crispEdges'>
@@ -111,7 +111,7 @@
 <g style="fill:none; color:green; stroke:currentColor; stroke-width:1.00; stroke-linecap:butt; stroke-linejoin:miter">
 </g>
 <g style="fill:none; color:black; stroke:currentColor; stroke-width:1.00; stroke-linecap:butt; stroke-linejoin:miter">
-	<g transform="translate(153.3,262.2) rotate(-45)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:middle">
+	<g transform="translate(153.3,256.3) rotate(-45)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:middle">
 		<text>dtkun-fulong.(none)</text>
 	</g>
 	<g transform="translate(323.8,398.1) rotate(-45)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:middle">

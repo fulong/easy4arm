@@ -120,9 +120,9 @@
 	<g id="gnuplot_plot_1" ><title>gnuplot_plot_1</title>
 <g style="fill:none; color:red; stroke:currentColor; stroke-width:1.00; stroke-linecap:butt; stroke-linejoin:miter">
 	<g style = 'stroke:none; shape-rendering:crispEdges'>
-		<polygon fill = 'currentColor' points = '255.4,441.3 383.3,441.3 383.3,272.9 255.4,272.9 '/>
+		<polygon fill = 'currentColor' points = '255.4,441.3 383.3,441.3 383.3,268.8 255.4,268.8 '/>
 	</g>
-	<path  d='M255.4,441.3 L255.4,273.0 L383.2,273.0 L383.2,441.3 L255.4,441.3 Z  h0.01'/></g>
+	<path  d='M255.4,441.3 L255.4,268.9 L383.2,268.9 L383.2,441.3 L255.4,441.3 Z  h0.01'/></g>
 	</g>
 <g style="fill:none; color:black; stroke:currentColor; stroke-width:1.00; stroke-linecap:butt; stroke-linejoin:miter">
 	<path  d='M63.6,256.6 L63.6,441.3 L575.0,441.3 L575.0,256.6 L63.6,256.6 Z  h0.01'/></g>

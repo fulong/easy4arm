@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <link rel="stylesheet" type="text/css" href="../../stylesheets/stylesheet.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="../../stylesheets/pygment_trac.css" media="screen">
+        <link href="/easy4arm/favicon.ico" rel="SHORTCUT ICON">
+        <title>
+            Easy4arm by fulong
+        </title>
+    </head>
+    <body>
+        <header>
+            <div>
+                <h1>
+                    makefile
+                </h1><a href="index.html">返回变量目录</a>
+            </div>
+        </header>
+        <div class="container">
+            <section id="main_content">
+                <h2>
+                    configure_type_mk
+                </h2>
+                判断configure_type的mk文件是否存在,这个变量不为YES的时候，将不能使用Makefile全部的目标，只能使用configure目标
+                <h2>
+                    configure_type
+                </h2>
+                显示当前的工程类型，不一样的工程类型就不一样的值,有三个:1.setting_tools_configure,2.mkimage4a8_configure,3.prj_configure.这三个变量是越来越多的，如果增加了一些工具代码，则要增加这个变量的属性个数
+                <h2>
+                    HOST
+                </h2>
+                目的机子的架构，编译prj类型的项目的时候，HOST为arm，其他的为x86
+                <h2>
+                    proj_name_bak
+                </h2>
+                这个其实是proj_name的备份，有时候需要临时创建一个删除文件的时候，却由于某种原始动作执行不成功，这个备份名字要会用来恢复在删除动作执行前的备份。
+                <h2>
+                    proj_name
+                </h2>
+                当前项目的名字,是由configure_type.sh脚本生成的
+            </section>
+        </div>
+    </body>
+</html>
