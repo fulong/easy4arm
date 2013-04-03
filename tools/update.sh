@@ -1,6 +1,8 @@
 #!/bin/bash
 # @parm $1,传递的是工程目前使用的MK文件。
 # @parm $2,传递的是工程目前的类型。
+# @parm $3,传递的是cpu架构的类型。
+#$3，包括了lib.sh中ARCH_Sum变量中的值
 mk_name=$1
 cpu_select=$3
 root_dir=$2
@@ -17,6 +19,7 @@ echo "删除更新前生成的.d,.o文件"
 local Dependent_tmp
 local Object_tmp
 if [ "$root_dir" == "." ];then
+	#extend_dir变量，在lib.sh中定义
 	find $root_dir  | grep '\.d$' | grep -v "$extend_dir" |  xargs rm -f
 	find $root_dir  | grep '\.o$' | grep -v "$extend_dir" |  xargs rm -f
 else

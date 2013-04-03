@@ -70,16 +70,13 @@ ProjectName()
 	local flag=1 #初始化这个自动变量，使下面的能正确使用这个变量
 	while [ "$flag" != "0"  ];do
 	dialog --clear
-	dialog --title "项目名称" --inputbox "请输入你当前使用项目名称。为空时，会为默认.刚配置是默认为Myarm.，否则为configure_type.mk中的bak变量名字.\n" 20 50  2> $temp_file
+	dialog --title "项目名称" --inputbox "请输入你当前使用项目名称。第一次配置时，这个为空时，会为默认.刚配置是默认为Myarm.\n" 20 50  2> $temp_file
 	
 	proj_name=$(cat $temp_file)
 	flag=0
 	if [ -z "$proj_name" ];then
 	dialog --title "再次确认" --yesno "你将会使用默认的项目名称，你确定要这样做吗？" 10 30
 	flag=$?
-	if [ "$flag" = "0" ];then
-	proj_name=Myarm
-	fi
 	fi
 	done
 }

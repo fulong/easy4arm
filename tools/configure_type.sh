@@ -2,13 +2,11 @@
 #用来生成configure_type.mk
 #$2,表示可以删除的目录。只有在distclean目标中才会有值。
 #$3,表示当前arm项目的名字。只有在distclean目标中才会有值。
+#$1,说明configure_type.mk存不存在。
 #configure_type，表示项目目前所在的项目属性。
 #1.prj_configure，这里代表的是arm项目。
 #2.setting_tools_configure，这里代表项目是关于setting的，因为项目有编写setting这个程序的源代码，所以要分开来管理。
 #3.mkimage4a8_configure，这里代表项目是关于mkimage4a8的
-#HOST，代表编译出来的目标文件是什么指令系统的。
-#1.arm
-#2.x86
 temp_file=/tmp/cross_configure #暂存文件
 temp_item=
 temp4prj_name=$3
@@ -22,7 +20,7 @@ do
 	elif [ "$temp" == "mkimage4a8.mk" ];then
 			temp_item="mkimage4a8  --->$temp\n$temp_item"
 	else
-			echo "unkonw:$temp"
+			echo "unkonw:$temp"configure_type_mk
 			echo "工程不会生成这个mk文件。"
 	fi	
 done
@@ -35,11 +33,10 @@ proj_Select()
 {
 if [ -z "$temp_item" ];then
 	local proj_VAR='proj\nsetting\nmkimage4a8\n' #可供选择的项目类型
-	temp_information="请输入使用的项目名称。你可以选择的项目名称(目前支持的)如下.\n"
 else
 	local proj_VAR=$temp_item;
-	temp_information="请输入转换的项目名称。你可以选择的项目名称(目前支持的)如下.\n"
 fi
+	temp_information="请输入转换的项目名称。你可以选择的项目名称(目前支持的)如下.\n"
 	local flag=1 #初始化这个自动变量，使下面的能正确使用这个变量
 	local proj_select=
 	while [ "$flag" != "0" ];do
@@ -80,21 +77,25 @@ esac
 	fi
 	done
 }
-if ! [ "$1" == "YES" ];then
 		proj_Select $1
+if ! [ "$1" == "YES" ];then
+		#设置项目名称,proj_name。
 		ProjectName
+		if [ -z "$proj_name" ];then 
+			proj_name=Myarm
+		fi
 		echo 'configure_type_mk=YES' > configure_type.mk
 		echo "configure_type=$project" >> configure_type.mk
 		echo 'HOST=arm' >> configure_type.mk
 		echo "proj_name_bak=$proj_name" >> configure_type.mk
 		echo "proj_name=$proj_name" >> configure_type.mk
 else
-		proj_Select $1
 case "$project" in
 	"prj_configure") 		
 		export `cat configure_type.mk | grep "proj_name_bak="`
+		proj_name=$proj_name_bak
 		sed -i '$d' configure_type.mk
-		echo "proj_name=$proj_name_bak" >> configure_type.mk
+		echo "proj_name=$proj_name" >> configure_type.mk
 		unset proj_name_bak
 		sed -i 's/^configure_type=.*$/configure_type=prj_configure/g' configure_type.mk
 		sed -i 's/^HOST=.*$/HOST=arm/g' configure_type.mk

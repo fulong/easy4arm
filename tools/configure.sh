@@ -2,7 +2,7 @@
 ##################################################################
 # @file : configure.sh
 # @brief: 项目代码最初使用的时候必须先运行这个脚本，配置好编译器，体系结构等等
-# @$1:项目类型
+# @$1:项目MK跟configure_mk文件是否存在
 ######################全局变量######################################
 if ! [ -f "configure_type.mk"  ] ;then
 echo "请正确使用configure.sh."
@@ -164,9 +164,9 @@ dir4exe()
 }
 ###################生成的bin文件跟反汇编文件所在的路径####################################
 ####################编译环境配置###################################
+cp /dev/null $mk_name
 case "$1" in
 	"prj_configure" )
-		echo "proj_name=$proj_name" > $mk_name
 		CrossCompiler_Select
 		ARCH_Select
 		CPU_Select
@@ -178,7 +178,6 @@ case "$1" in
 		CROSS_COMPILER=
 		arch_select=x86
 		cpu_select=x86
-		echo "proj_name=$proj_name" > $mk_name
 		echo "CROSS_COMPILER=$CROSS_COMPILER" >> $mk_name
 		echo "ARCH=$arch_select" >> $mk_name
 		echo "CPU=$cpu_select" >> $mk_name
@@ -189,7 +188,6 @@ case "$1" in
 		CROSS_COMPILER=
 		arch_select=x86
 		cpu_select=x86
-		echo "proj_name=$proj_name" > $mk_name
 		echo "CROSS_COMPILER=$CROSS_COMPILER" >> $mk_name
 		echo "ARCH=$arch_select" >> $mk_name
 		echo "CPU=$cpu_select" >> $mk_name
