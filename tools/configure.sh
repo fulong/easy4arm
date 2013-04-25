@@ -2,13 +2,14 @@
 ##################################################################
 # @file : configure.sh
 # @brief: 项目代码最初使用的时候必须先运行这个脚本，配置好编译器，体系结构等等
-# @$1:项目MK跟configure_mk文件是否存在
-######################全局变量######################################
+# $1,项目类型。
+##################################################################
 if ! [ -f "configure_type.mk"  ] ;then
 echo "请正确使用configure.sh."
 echo "指令：make configure"
 exit 1
 fi
+type=$1
 ######################全局变量######################################
 cross_select= #编译器类型存储
 arch_select= #指令集选型
@@ -17,56 +18,61 @@ exe_dir= #可执行文件，与反汇编文件所在
 LDS_BAK=lds_bak #链接脚本备份文件所在的文件夹
 OS= #选择的RT系统
 trap 'rm -rf configure_type.mk;exit 1' INT
-
-
 ######################全局变量######################################
 source tools/lib.sh
 dialog --title "configure" --msgbox "项目代码最初使用的时候运行的一个脚本，配置好编译环境，体系结构等等" 10 30 
 #导入项目名字
 export `cat configure_type.mk | grep "proj_name="`
-case "$1" in
-	"prj_configure" )
-		root_dir=.
-		;;
-	"setting_tools_configure" )
-		root_dir=tools_src/setting
-		;;
-	"mkimage4a8_configure" )
-		root_dir=tools_src/mkimage4a8
-		;;
-		* )
+export `cat configure_type.mk | grep "proj_name_bak="`
+if [ -z "$type" ];then
+	type=$proj_name_bak
+fi
+proj_name_sum="${proj_name_bak}\n${proj_name_extern_sum}"
+#cpu_relate的索引表，这些数字代表，下面数组中，arch所在的位置，相隔的多少，就是在这个arch里面有多少个减1这么多个cpu内核。
+#cpu_relate,如果有新的arch 和cpu内核，需要在这两个数组中登记，cpu_relate_local_num数组负责索引arch位置，cpu_relate的存储方式为arch，cpu，cpu，。。。。
+cpu_relate_local_num=(0 2 4 6)
+cpu_relate=(armv7-m cortex-m3 armv4t arm920t armv7-a cortex-a8 x86 x86)
+type_select=`echo "$proj_name_sum" | grep $type`
+if [ -z "$type_select" ];then
 		echo "mk文件的名字有误"
-		echo "当前:$1"
+		echo "当前:$type"
 		exit 1
-		;;
-esac
+else
+	if [ "$type" == "$proj_name_bak" ];then
+		root_dir=.
+	else
+		root_dir=tools_src/${type}
+	fi
+fi
 configure_mk=${proj_name}_mk
 mk_name=${proj_name}.mk
 log_dir=${root_dir}/log #日志文件所保存的文件夹
 mkdir -p $log_dir
 
-
 #################交叉编译器版本选择#####################################
 CrossCompiler_Select()
 {
 	local cross_item_num=2
-	local cross_item='1 arm-none-eabi 2 arm-uclinuxeabi'
+	local cross_item='1 none 2 arm-uclinuxeabi 3 arm-none-eabi'
 	
 	local flag=1 #初始化这个自动变量，使下面的能正确使用这个变量
     #判断选择的是哪个编译器版本。
 	while [ "$flag" != "0" ];do
 	dialog --clear
-	dialog --title "交叉编译器版本" --menu "你将会选择哪个版本？" 10 30 ${cross_item_num} ${cross_item} --title "再次确认" --yesno "你确定要这样做吗？" 10 30 2> $temp_file
+dialog --title "交叉编译器版本" --menu "你将会选择哪个版本？" 10 30 ${cross_item_num} ${cross_item} --title "再次确认" --yesno "你确定要这样做吗？" 10 30 2> $temp_file
 	flag=$?
 	done
 	
 	cross_select=$(cat $temp_file)
-	if [ "$cross_select" = "1" ];then
+	if [ "$cross_select" = "2" ];then
 	echo "CROSS_COMPILER=arm-none-eabi-" >> $mk_name
 	cross_select=arm-none-eabi-
-	elif [ "$cross_select" = "2" ];then
+	elif [ "$cross_select" = "3" ];then
 	echo "CROSS_COMPILER=arm-uclinuxeabi-" >> $mk_name
 	cross_select=arm-uclinuxeabi-
+	elif [ "$cross_select" = "1" ];then
+	echo "CROSS_COMPILER=" >> $mk_name
+	cross_select=
 	fi
 }
 #################交叉编译器版本选择#####################################
@@ -77,21 +83,30 @@ CrossCompiler_Select()
 #输入指令集版本选择。
 ARCH_Select()
 {
-	local ARCH_VAR='armv7-m\narmv4t\narmv7-a\n' #可供选择的指令集
+	local arch_temp
+	local i=0
+	local ARCH_sum
+	while [ "$i" -lt "${#cpu_relate_local_num[*]}" ];do
+		ARCH_sum="${cpu_relate[${cpu_relate_local_num[i]}]}\n$ARCH_sum"
+		i=`expr $i + 1`
+	done
 	local flag=1 #初始化这个自动变量，使下面的能正确使用这个变量
 	while [ "$flag" != "0" ];do
 	dialog --clear
-	dialog --title "指令集版本选择" --inputbox "请输入你当前使用的指令集名称。你可以选择的指令集(目前支持).\n$ARCH_VAR" 20 50  2> $temp_file
+	dialog --title "指令集版本选择" --inputbox "请输入你当前使用的指令集名称。你可以选择的指令集(目前支持).\n$ARCH_sum" 20 50  2> $temp_file
 	
 	arch_select=$(cat $temp_file)
 	flag=0
 	if [ -z "$arch_select" ];then
 	dialog --title "再次确认" --yesno "你将会使用GCC默认的指令集，你确定要这样做吗？" 10 30
-	arch_select=armv4t
 	flag=$?
-	elif [ "$arch_select" != "armv7-m" ] && [ "$arch_select" != "armv4t" ] && [ "$arch_select" != "armv7-a" ] ;then
-	dialog --title "你可以选择的指令集(目前支持),请输入正确的指令集名称"  --msgbox "$ARCH_VAR" 20 50
-	flag=1
+	arch_select=armv4t
+	else
+		arch_temp=`echo $ARCH_sum | grep $arch_select`
+		if [ -z "$arch_temp" ] ;then
+		dialog --title "你可以选择的指令集(目前支持),请输入正确的指令集名称"  --msgbox "$ARCH_sum" 20 50
+		flag=1
+		fi
 	fi
 	done
 	
@@ -104,39 +119,62 @@ ARCH_Select()
 #`cortex-a8', `cortex-a9', `cortex-a15', `cortex-r4', `cortex-r4f', `cortex-r5', `cortex-m4', `
 #cortex-m3', `cortex-m1', `cortex-m0', `xscale', `iwmmxt', `iwmmxt2', `ep9312', `fa526', `fa626', `fa606te', `fa626te', `fmp626', `fa726te'.
 #输入CPU内核版本选择。
+#$1,系统选择的指令集合
 CPU_Select()
 {
-	local CPU_VAR='arm920t\ncortex-a8\ncortex-m3\n' #可供选择的CPU内核
+	local cpu_temp
+	local cpu_index
+	local arch_temp=$1
+	local i=0
+	local k=0
+	local ARCH_sum
+	local CPU_sum
+	while [ "$i" -lt "${#cpu_relate_local_num[*]}" ];do
+		ARCH_sum="${cpu_relate[${cpu_relate_local_num[i]}]}"
+		if [ "$arch_temp" == $ARCH_sum ];then
+			cpu_index=${cpu_relate_local_num[i]}
+			i=`expr $i + 1`
+			break
+		fi
+		i=`expr $i + 1`
+	done
+	if [ "$i" -eq "${#cpu_relate_local_num[*]}" ];then
+		i=${#cpu_relate[*]}
+		i=`expr ${i} - ${cpu_index}`
+		i=`expr  ${i} - 1`
+	else
+		i=`expr ${cpu_relate_local_num[i]} - ${cpu_index}`
+		i=`expr ${i} - 1`
+		fi
+	while [ "$i" -gt "0" ];do
+		k=`expr ${cpu_index} + ${i}`
+		CPU_sum="${cpu_relate[${k}]}\n$CPU_sum"
+		i=`expr $i - 1`
+	done	
+		
 	local flag=1 #初始化这个自动变量，使下面的能正确使用这个变量
 	while [ "$flag" != "0" ];do
 	dialog --clear
-	dialog --title "CPU内核版本" --inputbox "请输入你当前使用的CPU内核版本名称。你可以选择的CPU内核版本(目前支持).\n$CPU_VAR" 20 50  2> $temp_file
+	dialog --title "CPU内核版本" --inputbox "请输入你当前使用的CPU内核版本名称。你可以选择的CPU内核版本(目前支持).\n$CPU_sum" 20 50  2> $temp_file
 	
 	cpu_select=$(cat $temp_file)
 	flag=0
 	if [ -z "$cpu_select" ];then
+	if [ "$i" == "0" ];then #如果不是唯一的选项，空文本将会无效，那时一定要有输入文本才行
 	dialog --title "再次确认" --yesno "你将会使用GCC默认的CPU内核版本，你确定要这样做吗？" 10 30
-	cpu_select=arm920t
 	flag=$?
-	elif [ "$cpu_select" != "arm920t" ] && [ "$cpu_select" != "cortex-a8" ] && [ "$cpu_select" != "cortex-m3" ] ;then
-	dialog --title "你可以选择的CPU内核版本(目前支持),请输入正确的CPU内核版本名称"  --msgbox "$CPU_VAR" 20 50
-	flag=1
-	if [ "$arch_select" = "" ] && [ "$flag" = "0" ];then
-	    dialog  --msgbox "cpu选型有误，与指令集版本不能不同时为空，请重新配置一次。" 20 50
-	    rm $mk_name
-	    clear
-	    exit 0
+	cpu_select=${cpu_relate[${k}]}
 	fi
+	else
+	cpu_temp=`echo $CPU_sum | grep $cpu_select`
+		if [ -z "$cpu_temp" ] ;then
+			dialog --title "你可以选择的CPU内核版本(目前支持),请输入正确的CPU内核版本名称"  --msgbox "$CPU_sum" 20 50
+			flag=1
+		fi
 	fi
 	done
 	
 	echo "CPU=$cpu_select" >> $mk_name
-	if [ "$arch_select" != "" ] && [ "$cpu_select" = "" ];then
-	    dialog  --msgbox "cpu选型有误，与指令集版本不能不同时为空，请重新配置一次。" 20 50
-	    rm $mk_name
-	    clear
-	    exit 0
-	fi
 }
 ####################CPU内核版本选择####################################
 ####################生成的bin文件跟反汇编文件所在的路径####################################
@@ -165,40 +203,12 @@ dir4exe()
 ###################生成的bin文件跟反汇编文件所在的路径####################################
 ####################编译环境配置###################################
 cp /dev/null $mk_name
-case "$1" in
-	"prj_configure" )
+
 		CrossCompiler_Select
 		ARCH_Select
-		CPU_Select
+		CPU_Select "$arch_select"
 		dir4exe
 		echo "log_dir=$log_dir" >> $mk_name
-		mkdir -p $log_dir
-		;;
-	"setting_tools_configure" )
-		CROSS_COMPILER=
-		arch_select=x86
-		cpu_select=x86
-		echo "CROSS_COMPILER=$CROSS_COMPILER" >> $mk_name
-		echo "ARCH=$arch_select" >> $mk_name
-		echo "CPU=$cpu_select" >> $mk_name
-		dir4exe
-		echo "log_dir=${log_dir}" >> $mk_name
-		;;
-	"mkimage4a8_configure" )
-		CROSS_COMPILER=
-		arch_select=x86
-		cpu_select=x86
-		echo "CROSS_COMPILER=$CROSS_COMPILER" >> $mk_name
-		echo "ARCH=$arch_select" >> $mk_name
-		echo "CPU=$cpu_select" >> $mk_name
-		dir4exe
-		echo "log_dir=${log_dir}" >> $mk_name
-		;;
-		* )
-		echo "项目类型有误"
-		exit 1
-		;;
-esac
 
 echo "编译环境配置开始"
 sleep 1
@@ -241,14 +251,14 @@ if [ "$arch_select" = "armv7-m" ];then
 case "$cpu_select" in
   "cortex-m3" )
 	echo "#添加$cpu_select相关标志" >> $mk_name
-      echo 'CFLAGS += -march=$(ARCH) -mthumb -mcpu=$(CPU) ' >> $mk_name
-      echo 'ASFLAGS += -march=$(ARCH) -mthumb -mcpu=$(CPU) ' >> $mk_name
-      echo 'LD_FLAGS += -T$(exe_dir)/$(CPU).lds' >> $mk_name
+    echo 'CFLAGS += -march=$(ARCH) -mthumb -mcpu=$(CPU) ' >> $mk_name
+    echo 'ASFLAGS += -march=$(ARCH) -mthumb -mcpu=$(CPU) ' >> $mk_name
+	echo 'LD_FLAGS += -T$(exe_dir)/$(CPU).lds' >> $mk_name
 	echo "#添加$cpu_select相关标志" >> $mk_name
-      CFLAGS="$CFLAGS -march=$arch_select -mthumb -mcpu=$cpu_select"
-      ASFLAGS="$ASFLAGS -march=$arch_select -mthumb -mcpu=$cpu_select"
-      LD_FLAGS="$LD_FLAGS -T$exe_dir/$cpu_select.lds"
-      cp -rf $LDS_BAK/$cpu_select.lds.bak.txt $exe_dir/$cpu_select.lds
+    CFLAGS="$CFLAGS -march=$arch_select -mthumb -mcpu=$cpu_select"
+    ASFLAGS="$ASFLAGS -march=$arch_select -mthumb -mcpu=$cpu_select"
+    LD_FLAGS="$LD_FLAGS -T$exe_dir/$cpu_select.lds"
+    cp -rf $LDS_BAK/$cpu_select.lds.bak.txt $exe_dir/$cpu_select.lds
       ;;
   *) 
     echo "cpu选型有误，与指令集版本不匹配，请重新配置一次。"
@@ -261,15 +271,15 @@ if [ "$arch_select" = "armv7-a" ];then
 case "$cpu_select" in
   "cortex-a8" )
 	echo "#添加$cpu_select相关标志" >> $mk_name
-      echo 'CFLAGS += -march=$(ARCH) -mthumb -mcpu=$(CPU) ' >> $mk_name
-      echo 'ASFLAGS += -march=$(ARCH) -mthumb -mcpu=$(CPU) ' >> $mk_name
-      echo 'LD_FLAGS += -T$(exe_dir)//$(CPU).lds' >> $mk_name
+    echo 'CFLAGS += -march=$(ARCH) -mthumb -mcpu=$(CPU) ' >> $mk_name
+    echo 'ASFLAGS += -march=$(ARCH) -mthumb -mcpu=$(CPU) ' >> $mk_name
+    echo 'LD_FLAGS += -T$(exe_dir)//$(CPU).lds' >> $mk_name
 	echo "#添加$cpu_select相关标志" >> $mk_name
-         CFLAGS="$CFLAGS -march=$arch_select -mthumb -mcpu=$cpu_select"
-      ASFLAGS="$ASFLAGS -march=$arch_select -mthumb -mcpu=$cpu_select"
-      LD_FLAGS="$LD_FLAGS -T$exe_dir/$cpu_select.lds"
-      cp -rf $LDS_BAK/$cpu_select.lds.bak.txt $exe_dir/$cpu_select.lds
-      ;;
+    CFLAGS="$CFLAGS -march=$arch_select -mthumb -mcpu=$cpu_select"
+	ASFLAGS="$ASFLAGS -march=$arch_select -mthumb -mcpu=$cpu_select"
+    LD_FLAGS="$LD_FLAGS -T$exe_dir/$cpu_select.lds"
+    cp -rf $LDS_BAK/$cpu_select.lds.bak.txt $exe_dir/$cpu_select.lds
+    ;;
   *) 
     echo "cpu选型有误，与指令集版本不匹配，请重新配置一次。"
     rm $mk_name
@@ -313,6 +323,7 @@ fi
 echo "RM=rm -rf">> $mk_name
 echo "root_dir=$root_dir">> $mk_name
 #*******************项目源码生成******************************************
+#源码的位置不能改变，因为update目标依赖着这个位置
 NoARCH_AND_NoOS_Source_Path
 Source_Path $cpu_select
 ####################项目是否选用OS###################################

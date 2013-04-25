@@ -70,7 +70,7 @@ endif #ifeq "$(configure_on)" "YES"
 configure:
 ifeq "$($(proj_name)_mk)" ""
 	@./tools/configure_type.sh
-	@./tools/configure.sh "prj_configure"
+	@./tools/configure.sh 
 endif
 install:
 	@./tools/install.sh $(proj_name) "$(ARCH)" $(proj_name_bak)
@@ -85,13 +85,13 @@ setting:
 	@./tools/setting.bin
 change2others:
 	@cp configure_type.mk type.bak
-	@./tools/configure_type.sh "$(configure_type_mk)"
+	@./tools/configure_type.sh "$(configure_type_mk)" "" $(proj_name_bak)
 	@export `cat configure_type.mk | grep "proj_name="`;if [ -f "$${proj_name}.mk" ];then \
 	rm type.bak;echo "成功改变。";\
 	else mv type.bak configure_type.mk;echo "$${proj_name}.mk文件不存在,改变失败。";\
 	fi
 compilingx:
-	@./tools/configure_type.sh "$(configure_type_mk)"
+	@./tools/configure_type.sh "$(configure_type_mk)" "" $(proj_name_bak)
 	@export `cat configure_type.mk | grep "configure_type="`;./tools/configure.sh $$configure_type
 allclean:clean dclean
 clean :
@@ -121,7 +121,7 @@ distclean:
 	-@if [ "${exe_dir}" != "${root_dir}" ];then \
 	${RM} ${exe_dir};\
 	fi
-ifeq "$(configure_type)" "prj_configure"
+ifeq "$(configure_type)" "$(proj_name_bak)"
 	${RM}   *.lds *.bin
 endif
 endif #ifeq "$(configure_on)" "YES"
@@ -130,14 +130,14 @@ status:
 ifneq "$(configure_on)" "YES"
 	@echo "configure文件不存在" && exit 1
 endif
-ifeq "$(configure_type)" "prj_configure"
+ifeq "$(configure_type)" "$(proj_name_bak)"
 	@echo "Makefile目前在ARM项目状态中"
 	@echo "使用的处理器为$(ARCH)"
 endif
-ifeq "$(configure_type)" "setting_tools_configure"
+ifeq "$(configure_type)" "setting"
 	@echo "Makefile目前在编译linux工具项目状态中(setting.bin)"
 endif
-ifeq "$(configure_type)" "mkimage4a8_configure"
+ifeq "$(configure_type)" "mkimage4a8"
 	@echo "Makefile目前在编译linux工具项目状态中(mkimage4a8.bin)"
 endif
 

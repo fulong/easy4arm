@@ -11,7 +11,7 @@ echo "安装中........"
 if [ -z "$proj_name" ] || [ -z "$ARCH" ];then
 	echo "$proj_name"
 	echo "$ARCH"
-	echo "Error!!Please config this project."
+	echo "Error!!Please correct to config this project."
 	exit 1
 fi
 mk_name=${proj_name}.mk

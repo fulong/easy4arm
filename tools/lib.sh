@@ -5,8 +5,11 @@ temp_file=/tmp/cross_configure #暂存文件
 ####################项目的源码目录汇总###################################
 #目录中只包含了没有系统，跟CPU无关的代码目录
 OS_dir="/OS/"
-ARCH_Sum="/cortex-m3 /arm920t /cortex-a8" #这个变量表示函数NoARCH_AND_NoOS_Source_Path中消除的文件夹
+ARCH_dir="/cortex-m3 /arm920t /cortex-a8" #这个变量表示函数NoARCH_AND_NoOS_Source_Path中消除的文件夹
 extend_dir="/tools_src/"
+#额外的一些项目名字，如果要增加不同项目，只需要在这里增加该项目名字
+proj_name_extern_sum="setting\nmkimage4a8\n"
+
 NoARCH_AND_NoOS_Source_Path()
 {
 	sum_dir=$(find $root_dir -type d | grep -v '^\./\.')
@@ -14,7 +17,7 @@ NoARCH_AND_NoOS_Source_Path()
 	Csources=$(find $root_dir |grep -v '^\./\.' | grep '\.c$') # | sed 's/^\..*\///g')
 	Ssources=$(find $root_dir |grep -v '^\./\.' | grep '\.S$') # | sed 's/^\..*\///g')
 if [ "$root_dir" = "." ];then
-	for TEMP in $ARCH_Sum $OS_dir $extend_dir
+	for TEMP in $ARCH_dir $OS_dir $extend_dir
 	do
 		sum_dir=$(echo "$sum_dir" | grep -v "$TEMP")
 		Csources=$(echo "$Csources" | grep -v "$TEMP")
@@ -42,7 +45,7 @@ fi
 #		1.cortex-m3,增添cortex-m3源码目录跟cortex-m3源码
 #		2.OS,增添OS源码目录跟OS源码
 #		3.自定义添加文件,目录
-#note:只支持一个参数
+#note:只支持一个参数，这个函数不能单独使用，因为参数不能为空
 Source_Path()
 {
 	local sum_dir_temp=$(find . -type d | grep -v '^\./\.' | grep "$1")
