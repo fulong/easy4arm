@@ -8,7 +8,7 @@ OS_dir="/OS/"
 ARCH_dir="/cortex-m3 /arm920t /cortex-a8" #这个变量表示函数NoARCH_AND_NoOS_Source_Path中消除的文件夹
 extend_dir="/tools_src/"
 #额外的一些项目名字，如果要增加不同项目，只需要在这里增加该项目名字
-proj_name_extern_sum="setting\nmkimage4a8\n"
+proj_name_extern_sum="setting\ntest\nmkimage4a8\n"
 
 NoARCH_AND_NoOS_Source_Path()
 {
