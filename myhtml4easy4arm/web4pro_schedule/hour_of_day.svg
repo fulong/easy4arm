@@ -9,7 +9,7 @@
 >
 
 <title>Gnuplot</title>
-<desc>Produced by GNUPLOT 4.6 patchlevel 0 </desc>
+<desc>Produced by GNUPLOT 4.6 patchlevel 1 </desc>
 
 <g id="gnuplot_canvas">
 
@@ -122,6 +122,12 @@
 		<polygon fill = 'currentColor' points = '367.2,444.0 378.0,444.0 378.0,406.4 367.2,406.4 '/>
 	</g>
 	<path  d='M367.2,444.0 L367.2,406.5 L377.9,406.5 L377.9,444.0 L367.2,444.0 Z  h0.01'/>	<g style = 'stroke:none; shape-rendering:crispEdges'>
+		<polygon fill = 'currentColor' points = '409.9,444.0 420.6,444.0 420.6,425.2 409.9,425.2 '/>
+	</g>
+	<path  d='M409.9,444.0 L409.9,425.3 L420.5,425.3 L420.5,444.0 L409.9,444.0 Z  h0.01'/>	<g style = 'stroke:none; shape-rendering:crispEdges'>
+		<polygon fill = 'currentColor' points = '431.2,444.0 441.9,444.0 441.9,425.2 431.2,425.2 '/>
+	</g>
+	<path  d='M431.2,444.0 L431.2,425.3 L441.8,425.3 L441.8,444.0 L431.2,444.0 Z  h0.01'/>	<g style = 'stroke:none; shape-rendering:crispEdges'>
 		<polygon fill = 'currentColor' points = '495.1,444.0 505.8,444.0 505.8,406.4 495.1,406.4 '/>
 	</g>
 	<path  d='M495.1,444.0 L495.1,406.5 L505.7,406.5 L505.7,444.0 L495.1,444.0 Z  h0.01'/>	<g style = 'stroke:none; shape-rendering:crispEdges'>

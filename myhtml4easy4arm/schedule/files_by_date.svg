@@ -9,7 +9,7 @@
 >
 
 <title>Gnuplot</title>
-<desc>Produced by GNUPLOT 4.6 patchlevel 0 </desc>
+<desc>Produced by GNUPLOT 4.6 patchlevel 1 </desc>
 
 <g id="gnuplot_canvas">
 
@@ -91,43 +91,43 @@
 		<text> 14</text>
 	</g>
 	<path  d='M63.6,372.0 L63.6,363.0 M63.6,256.6 L63.6,265.6  h0.01'/>	<g transform="translate(68.1,380.3) rotate(-90)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:start">
-		<text>2013-01-19</text>
+		<text>2013-01-12</text>
 	</g>
-	<path  d='M75.8,372.0 L75.8,367.5 M75.8,256.6 L75.8,261.1 M88.0,372.0 L88.0,367.5 M88.0,256.6 L88.0,261.1 
-		M100.1,372.0 L100.1,367.5 M100.1,256.6 L100.1,261.1 M112.3,372.0 L112.3,367.5 M112.3,256.6 L112.3,261.1 
-		M124.5,372.0 L124.5,367.5 M124.5,256.6 L124.5,261.1 M136.7,372.0 L136.7,367.5 M136.7,256.6 L136.7,261.1 
-		M148.8,372.0 L148.8,363.0 M148.8,256.6 L148.8,265.6  h0.01'/>	<g transform="translate(153.3,380.3) rotate(-90)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:start">
+	<path  d='M92.0,372.0 L92.0,367.5 M92.0,256.6 L92.0,261.1 M120.4,372.0 L120.4,363.0 M120.4,256.6 L120.4,265.6 
+		 h0.01'/>	<g transform="translate(124.9,380.3) rotate(-90)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:start">
 		<text>2013-01-26</text>
 	</g>
-	<path  d='M161.0,372.0 L161.0,367.5 M161.0,256.6 L161.0,261.1 M173.2,372.0 L173.2,367.5 M173.2,256.6 L173.2,261.1 
-		M185.4,372.0 L185.4,367.5 M185.4,256.6 L185.4,261.1 M197.5,372.0 L197.5,367.5 M197.5,256.6 L197.5,261.1 
-		M209.7,372.0 L209.7,367.5 M209.7,256.6 L209.7,261.1 M221.9,372.0 L221.9,367.5 M221.9,256.6 L221.9,261.1 
-		M234.1,372.0 L234.1,363.0 M234.1,256.6 L234.1,265.6  h0.01'/>	<g transform="translate(238.6,380.3) rotate(-90)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:start">
-		<text>2013-02-02</text>
-	</g>
-	<path  d='M246.2,372.0 L246.2,367.5 M246.2,256.6 L246.2,261.1 M258.4,372.0 L258.4,367.5 M258.4,256.6 L258.4,261.1 
-		M270.6,372.0 L270.6,367.5 M270.6,256.6 L270.6,261.1 M282.8,372.0 L282.8,367.5 M282.8,256.6 L282.8,261.1 
-		M294.9,372.0 L294.9,367.5 M294.9,256.6 L294.9,261.1 M307.1,372.0 L307.1,367.5 M307.1,256.6 L307.1,261.1 
-		M319.3,372.0 L319.3,363.0 M319.3,256.6 L319.3,265.6  h0.01'/>	<g transform="translate(323.8,380.3) rotate(-90)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:start">
+	<path  d='M148.8,372.0 L148.8,367.5 M148.8,256.6 L148.8,261.1 M177.2,372.0 L177.2,363.0 M177.2,256.6 L177.2,265.6 
+		 h0.01'/>	<g transform="translate(181.7,380.3) rotate(-90)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:start">
 		<text>2013-02-09</text>
 	</g>
-	<path  d='M331.5,372.0 L331.5,367.5 M331.5,256.6 L331.5,261.1 M343.7,372.0 L343.7,367.5 M343.7,256.6 L343.7,261.1 
-		M355.8,372.0 L355.8,367.5 M355.8,256.6 L355.8,261.1 M368.0,372.0 L368.0,367.5 M368.0,256.6 L368.0,261.1 
-		M380.2,372.0 L380.2,367.5 M380.2,256.6 L380.2,261.1 M392.4,372.0 L392.4,367.5 M392.4,256.6 L392.4,261.1 
-		M404.5,372.0 L404.5,363.0 M404.5,256.6 L404.5,265.6  h0.01'/>	<g transform="translate(409.0,380.3) rotate(-90)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:start">
-		<text>2013-02-16</text>
-	</g>
-	<path  d='M416.7,372.0 L416.7,367.5 M416.7,256.6 L416.7,261.1 M428.9,372.0 L428.9,367.5 M428.9,256.6 L428.9,261.1 
-		M441.1,372.0 L441.1,367.5 M441.1,256.6 L441.1,261.1 M453.2,372.0 L453.2,367.5 M453.2,256.6 L453.2,261.1 
-		M465.4,372.0 L465.4,367.5 M465.4,256.6 L465.4,261.1 M477.6,372.0 L477.6,367.5 M477.6,256.6 L477.6,261.1 
-		M489.8,372.0 L489.8,363.0 M489.8,256.6 L489.8,265.6  h0.01'/>	<g transform="translate(494.3,380.3) rotate(-90)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:start">
+	<path  d='M205.7,372.0 L205.7,367.5 M205.7,256.6 L205.7,261.1 M234.1,372.0 L234.1,363.0 M234.1,256.6 L234.1,265.6 
+		 h0.01'/>	<g transform="translate(238.6,380.3) rotate(-90)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:start">
 		<text>2013-02-23</text>
 	</g>
-	<path  d='M501.9,372.0 L501.9,367.5 M501.9,256.6 L501.9,261.1 M514.1,372.0 L514.1,367.5 M514.1,256.6 L514.1,261.1 
-		M526.3,372.0 L526.3,367.5 M526.3,256.6 L526.3,261.1 M538.5,372.0 L538.5,367.5 M538.5,256.6 L538.5,261.1 
-		M550.6,372.0 L550.6,367.5 M550.6,256.6 L550.6,261.1 M562.8,372.0 L562.8,367.5 M562.8,256.6 L562.8,261.1 
-		M575.0,372.0 L575.0,363.0 M575.0,256.6 L575.0,265.6  h0.01'/>	<g transform="translate(579.5,380.3) rotate(-90)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:start">
-		<text>2013-03-02</text>
+	<path  d='M262.5,372.0 L262.5,367.5 M262.5,256.6 L262.5,261.1 M290.9,372.0 L290.9,363.0 M290.9,256.6 L290.9,265.6 
+		 h0.01'/>	<g transform="translate(295.4,380.3) rotate(-90)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:start">
+		<text>2013-03-09</text>
+	</g>
+	<path  d='M319.3,372.0 L319.3,367.5 M319.3,256.6 L319.3,261.1 M347.7,372.0 L347.7,363.0 M347.7,256.6 L347.7,265.6 
+		 h0.01'/>	<g transform="translate(352.2,380.3) rotate(-90)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:start">
+		<text>2013-03-23</text>
+	</g>
+	<path  d='M376.1,372.0 L376.1,367.5 M376.1,256.6 L376.1,261.1 M404.5,372.0 L404.5,363.0 M404.5,256.6 L404.5,265.6 
+		 h0.01'/>	<g transform="translate(409.0,380.3) rotate(-90)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:start">
+		<text>2013-04-06</text>
+	</g>
+	<path  d='M432.9,372.0 L432.9,367.5 M432.9,256.6 L432.9,261.1 M461.4,372.0 L461.4,363.0 M461.4,256.6 L461.4,265.6 
+		 h0.01'/>	<g transform="translate(465.9,380.3) rotate(-90)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:start">
+		<text>2013-04-20</text>
+	</g>
+	<path  d='M489.8,372.0 L489.8,367.5 M489.8,256.6 L489.8,261.1 M518.2,372.0 L518.2,363.0 M518.2,256.6 L518.2,265.6 
+		 h0.01'/>	<g transform="translate(522.7,380.3) rotate(-90)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:start">
+		<text>2013-05-04</text>
+	</g>
+	<path  d='M546.6,372.0 L546.6,367.5 M546.6,256.6 L546.6,261.1 M575.0,372.0 L575.0,363.0 M575.0,256.6 L575.0,265.6 
+		 h0.01'/>	<g transform="translate(579.5,380.3) rotate(-90)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:start">
+		<text>2013-05-18</text>
 	</g>
 	<path  d='M63.6,256.6 L63.6,372.0 L575.0,372.0 L575.0,256.6 L63.6,256.6 Z  h0.01'/>	<g transform="translate(17.6,314.3) rotate(270)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:middle">
 		<text>Files</text>
@@ -135,8 +135,9 @@
 </g>
 	<g id="gnuplot_plot_1" ><title>gnuplot_plot_1</title>
 <g style="fill:none; color:red; stroke:currentColor; stroke-width:1.00; stroke-linecap:butt; stroke-linejoin:miter">
-	<path  d='M100.1,363.8 L100.1,289.6 L112.3,289.6 L112.3,264.8 L258.4,264.8 L258.4,273.1 L258.4,256.6 L270.6,256.6 
-		L550.6,256.6 L562.8,256.6 L575.0,256.6  h0.01'/></g>
+	<path  d='M104.2,363.8 L104.2,289.6 L108.2,289.6 L108.2,264.8 L157.0,264.8 L157.0,273.1 L157.0,256.6 L161.0,256.6 
+		L254.4,256.6 L258.4,256.6 L262.5,256.6 L392.4,256.6 L392.4,273.1 L481.6,273.1 L481.6,264.8 L550.6,264.8 
+		L550.6,256.6  h0.01'/></g>
 	</g>
 <g style="fill:none; color:black; stroke:currentColor; stroke-width:1.00; stroke-linecap:butt; stroke-linejoin:miter">
 	<path  d='M63.6,256.6 L63.6,372.0 L575.0,372.0 L575.0,256.6 L63.6,256.6 Z  h0.01'/></g>

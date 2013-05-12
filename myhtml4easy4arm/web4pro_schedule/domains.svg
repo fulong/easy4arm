@@ -9,7 +9,7 @@
 >
 
 <title>Gnuplot</title>
-<desc>Produced by GNUPLOT 4.6 patchlevel 0 </desc>
+<desc>Produced by GNUPLOT 4.6 patchlevel 1 </desc>
 
 <g id="gnuplot_canvas">
 
@@ -97,28 +97,40 @@
 	<g id="gnuplot_plot_1" ><title>gnuplot_plot_1</title>
 <g style="fill:none; color:red; stroke:currentColor; stroke-width:1.00; stroke-linecap:butt; stroke-linejoin:miter">
 	<g style = 'stroke:none; shape-rendering:crispEdges'>
-		<polygon fill = 'currentColor' points = '106.2,463.4 191.6,463.4 191.6,274.2 106.2,274.2 '/>
+		<polygon fill = 'currentColor' points = '89.2,463.4 140.4,463.4 140.4,274.2 89.2,274.2 '/>
 	</g>
-	<path  d='M106.2,463.4 L106.2,274.3 L191.5,274.3 L191.5,463.4 L106.2,463.4 Z  h0.01'/>	<g style = 'stroke:none; shape-rendering:crispEdges'>
-		<polygon fill = 'currentColor' points = '276.7,463.4 362.0,463.4 362.0,416.0 276.7,416.0 '/>
+	<path  d='M89.2,463.4 L89.2,274.3 L140.3,274.3 L140.3,463.4 L89.2,463.4 Z  h0.01'/>	<g style = 'stroke:none; shape-rendering:crispEdges'>
+		<polygon fill = 'currentColor' points = '191.5,463.4 242.7,463.4 242.7,416.0 191.5,416.0 '/>
 	</g>
-	<path  d='M276.7,463.4 L276.7,416.1 L361.9,416.1 L361.9,463.4 L276.7,463.4 Z  h0.01'/>	<g style = 'stroke:none; shape-rendering:crispEdges'>
-		<polygon fill = 'currentColor' points = '447.2,463.4 532.5,463.4 532.5,451.5 447.2,451.5 '/>
+	<path  d='M191.5,463.4 L191.5,416.1 L242.6,416.1 L242.6,463.4 L191.5,463.4 Z  h0.01'/>	<g style = 'stroke:none; shape-rendering:crispEdges'>
+		<polygon fill = 'currentColor' points = '293.7,463.4 345.0,463.4 345.0,451.5 293.7,451.5 '/>
 	</g>
-	<path  d='M447.2,463.4 L447.2,451.6 L532.4,451.6 L532.4,463.4 L447.2,463.4 Z  h0.01'/></g>
+	<path  d='M293.7,463.4 L293.7,451.6 L344.9,451.6 L344.9,463.4 L293.7,463.4 Z  h0.01'/>	<g style = 'stroke:none; shape-rendering:crispEdges'>
+		<polygon fill = 'currentColor' points = '396.0,463.4 447.3,463.4 447.3,457.4 396.0,457.4 '/>
+	</g>
+	<path  d='M396.0,463.4 L396.0,457.5 L447.2,457.5 L447.2,463.4 L396.0,463.4 Z  h0.01'/>	<g style = 'stroke:none; shape-rendering:crispEdges'>
+		<polygon fill = 'currentColor' points = '498.3,463.4 549.5,463.4 549.5,457.4 498.3,457.4 '/>
+	</g>
+	<path  d='M498.3,463.4 L498.3,457.5 L549.4,457.5 L549.4,463.4 L498.3,463.4 Z  h0.01'/></g>
 	</g>
 	<g id="gnuplot_plot_2" ><title>gnuplot_plot_2</title>
 <g style="fill:none; color:green; stroke:currentColor; stroke-width:1.00; stroke-linecap:butt; stroke-linejoin:miter">
 </g>
 <g style="fill:none; color:black; stroke:currentColor; stroke-width:1.00; stroke-linecap:butt; stroke-linejoin:miter">
-	<g transform="translate(153.3,256.3) rotate(-45)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:middle">
+	<g transform="translate(119.2,256.3) rotate(-45)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:middle">
 		<text>dtkun-fulong.(none)</text>
 	</g>
-	<g transform="translate(323.8,398.1) rotate(-45)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:middle">
+	<g transform="translate(221.5,398.1) rotate(-45)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:middle">
 		<text>dtkun-fulong</text>
 	</g>
-	<g transform="translate(494.3,433.6) rotate(-45)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:middle">
+	<g transform="translate(323.8,433.6) rotate(-45)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:middle">
 		<text>qq.com</text>
+	</g>
+	<g transform="translate(426.1,439.5) rotate(-45)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:middle">
+		<text>dtkun.linux</text>
+	</g>
+	<g transform="translate(528.4,439.5) rotate(-45)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:middle">
+		<text>DTkun-linux.(none)</text>
 	</g>
 </g>
 	</g>

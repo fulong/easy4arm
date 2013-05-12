@@ -9,7 +9,7 @@
 >
 
 <title>Gnuplot</title>
-<desc>Produced by GNUPLOT 4.6 patchlevel 0 </desc>
+<desc>Produced by GNUPLOT 4.6 patchlevel 1 </desc>
 
 <g id="gnuplot_canvas">
 
@@ -127,7 +127,13 @@
 	<path  d='M109.4,444.0 L109.4,256.6 L131.1,256.6 L131.1,444.0 L109.4,444.0 Z  h0.01'/>	<g style = 'stroke:none; shape-rendering:crispEdges'>
 		<polygon fill = 'currentColor' points = '152.7,444.0 174.5,444.0 174.5,331.5 152.7,331.5 '/>
 	</g>
-	<path  d='M152.7,444.0 L152.7,331.6 L174.4,331.6 L174.4,444.0 L152.7,444.0 Z  h0.01'/></g>
+	<path  d='M152.7,444.0 L152.7,331.6 L174.4,331.6 L174.4,444.0 L152.7,444.0 Z  h0.01'/>	<g style = 'stroke:none; shape-rendering:crispEdges'>
+		<polygon fill = 'currentColor' points = '196.1,444.0 217.8,444.0 217.8,331.5 196.1,331.5 '/>
+	</g>
+	<path  d='M196.1,444.0 L196.1,331.6 L217.7,331.6 L217.7,444.0 L196.1,444.0 Z  h0.01'/>	<g style = 'stroke:none; shape-rendering:crispEdges'>
+		<polygon fill = 'currentColor' points = '239.4,444.0 261.1,444.0 261.1,368.9 239.4,368.9 '/>
+	</g>
+	<path  d='M239.4,444.0 L239.4,369.0 L261.0,369.0 L261.0,444.0 L239.4,444.0 Z  h0.01'/></g>
 	</g>
 <g style="fill:none; color:black; stroke:currentColor; stroke-width:1.00; stroke-linecap:butt; stroke-linejoin:miter">
 	<path  d='M55.3,256.6 L55.3,444.0 L575.0,444.0 L575.0,256.6 L55.3,256.6 Z  h0.01'/></g>

@@ -9,7 +9,7 @@
 >
 
 <title>Gnuplot</title>
-<desc>Produced by GNUPLOT 4.6 patchlevel 0 </desc>
+<desc>Produced by GNUPLOT 4.6 patchlevel 1 </desc>
 
 <g id="gnuplot_canvas">
 
@@ -147,9 +147,12 @@
 	<g id="gnuplot_plot_1" ><title>gnuplot_plot_1</title>
 <g style="fill:none; color:red; stroke:currentColor; stroke-width:1.00; stroke-linecap:butt; stroke-linejoin:miter">
 	<g style = 'stroke:none; shape-rendering:crispEdges'>
-		<polygon fill = 'currentColor' points = '159.5,444.0 180.9,444.0 180.9,269.0 159.5,269.0 '/>
+		<polygon fill = 'currentColor' points = '159.5,444.0 180.9,444.0 180.9,264.8 159.5,264.8 '/>
 	</g>
-	<path  d='M159.5,444.0 L159.5,269.1 L180.8,269.1 L180.8,444.0 L159.5,444.0 Z  h0.01'/></g>
+	<path  d='M159.5,444.0 L159.5,264.9 L180.8,264.9 L180.8,444.0 L159.5,444.0 Z  h0.01'/>	<g style = 'stroke:none; shape-rendering:crispEdges'>
+		<polygon fill = 'currentColor' points = '202.1,444.0 223.5,444.0 223.5,439.7 202.1,439.7 '/>
+	</g>
+	<path  d='M202.1,444.0 L202.1,439.8 L223.4,439.8 L223.4,444.0 L202.1,444.0 Z  h0.01'/></g>
 	</g>
 <g style="fill:none; color:black; stroke:currentColor; stroke-width:1.00; stroke-linecap:butt; stroke-linejoin:miter">
 	<path  d='M63.6,256.6 L63.6,444.0 L575.0,444.0 L575.0,256.6 L63.6,256.6 Z  h0.01'/></g>
