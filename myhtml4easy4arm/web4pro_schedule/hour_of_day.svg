@@ -116,6 +116,9 @@
 		<polygon fill = 'currentColor' points = '282.0,444.0 292.8,444.0 292.8,425.2 282.0,425.2 '/>
 	</g>
 	<path  d='M282.0,444.0 L282.0,425.3 L292.7,425.3 L292.7,444.0 L282.0,444.0 Z  h0.01'/>	<g style = 'stroke:none; shape-rendering:crispEdges'>
+		<polygon fill = 'currentColor' points = '303.3,444.0 314.1,444.0 314.1,425.2 303.3,425.2 '/>
+	</g>
+	<path  d='M303.3,444.0 L303.3,425.3 L314.0,425.3 L314.0,444.0 L303.3,444.0 Z  h0.01'/>	<g style = 'stroke:none; shape-rendering:crispEdges'>
 		<polygon fill = 'currentColor' points = '324.6,444.0 335.4,444.0 335.4,350.2 324.6,350.2 '/>
 	</g>
 	<path  d='M324.6,444.0 L324.6,350.3 L335.3,350.3 L335.3,444.0 L324.6,444.0 Z  h0.01'/>	<g style = 'stroke:none; shape-rendering:crispEdges'>
