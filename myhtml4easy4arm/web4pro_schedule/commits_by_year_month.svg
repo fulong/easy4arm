@@ -125,7 +125,10 @@
 	<path  d='M237.3,390.0 L237.3,262.5 L237.3,390.0 Z  h0.01'/>	<g style = 'stroke:none; shape-rendering:crispEdges'>
 		<polygon fill = 'currentColor' points = '322.7,390.0 322.8,390.0 322.8,386.9 322.7,386.9 '/>
 	</g>
-	<path  d='M322.7,390.0 L322.7,387.0 L322.7,390.0 Z  h0.01'/></g>
+	<path  d='M322.7,390.0 L322.7,387.0 L322.7,390.0 Z  h0.01'/>	<g style = 'stroke:none; shape-rendering:crispEdges'>
+		<polygon fill = 'currentColor' points = '405.5,390.0 405.6,390.0 405.6,386.9 405.5,386.9 '/>
+	</g>
+	<path  d='M405.5,390.0 L405.5,387.0 L405.5,390.0 Z  h0.01'/></g>
 	</g>
 <g style="fill:none; color:black; stroke:currentColor; stroke-width:1.00; stroke-linecap:butt; stroke-linejoin:miter">
 	<path  d='M63.6,256.6 L63.6,390.0 L575.0,390.0 L575.0,256.6 L63.6,256.6 Z  h0.01'/></g>
