@@ -10,5 +10,4 @@
 		vrapper	:	http://vrapper.sourceforge.net/update-site/stable (eclipse 的一个中 vim 插件)
 		zylin	:	http://opensource.zylin.com/zylincdt
 		shelled:
-更详细的请看
-http://fulong.github.com/easy4arm/
+[更详细的请看](http://fulong.github.com/easy4arm/)
