@@ -5,8 +5,8 @@
 #### IDE
 	Eclipse 4.2
 #### CORSS_COMPILER 
-		1.arm-none-eabi
-		2.arm-uclinuxeabi
+	1.arm-none-eabi
+	2.arm-uclinuxeabi
 #### Eclipse plugin:Update Site
 		git		:  	http://download.eclipse.org/egit/update
 		arm		:  	http://gnuarmeclipse.sourceforge.net/updates
