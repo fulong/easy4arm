@@ -2,4 +2,4 @@
 */testarm/*
 *.mk
 .*
-*/log/*
+*.log
