@@ -8,7 +8,15 @@ OS_dir="/OS/"
 ARCH_dir="/cortex-m3 /arm920t /cortex-a8" #这个变量表示函数NoARCH_AND_NoOS_Source_Path中消除的文件夹
 extend_dir="/tools_src/"
 #额外的一些项目名字，如果要增加不同项目，只需要在这里增加该项目名字
-proj_name_extern_sum="setting\nmkimage4a8\n"
+proj_name_setting="setting---->图形界面配置预定义项目程序编写\n"
+proj_name_testarm="testarm---->测试用的arm程序\n"
+proj_name_test="test---->测试用的linux程序\n"
+proj_name_mkimage4a8="mkimage4a8---->制作a8镜像的程序\n"
+
+proj_name_extern_sum="$proj_name_setting\
+$proj_name_testarm\
+$proj_name_test\
+$proj_name_mkimage4a8"
 
 NoARCH_AND_NoOS_Source_Path()
 {
@@ -48,12 +56,13 @@ fi
 #note:只支持一个参数，这个函数不能单独使用，因为参数不能为空
 Source_Path()
 {
+if [ "$root_dir" = "." ];then
 	local sum_dir_temp=$(find . -type d | grep -v '^\./\.' | grep "$1")
 	Csources=$(find . | grep -v '^\./\.' | grep '\.c$' | grep "$1" ) # | sed 's/^\..*\///g')
 	Ssources=$(find . | grep -v '^\./\.' | grep '\.S$' | grep "$1" ) # | sed 's/^\..*\///g')
 	Csources=$(echo -n $Csources)
 	Ssources=$(echo -n $Ssources)
-		
+fi		
 if [ "$1" != "NO_USE" ];then
 	echo "#############增加$1相关源文件与目录####################" >>$mk_name
 	echo "Csources+=$Csources" >>$mk_name
