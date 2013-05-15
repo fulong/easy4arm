@@ -121,8 +121,8 @@ distclean:
 	-@if [ "${exe_dir}" != "${root_dir}" ];then \
 	${RM} ${exe_dir};\
 	fi
-ifeq "$(configure_type)" "$(proj_name_bak)"
-	${RM}   *.lds *.bin
+ifeq "$(exe_dir)" "$(root_dir)"
+	${RM}   ${root_dir}/*.lds ${root_dir}/*.bin
 endif
 endif #ifeq "$(configure_on)" "YES"
 

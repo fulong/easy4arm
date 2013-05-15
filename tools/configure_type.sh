@@ -16,7 +16,7 @@ temp4prj_name=$3
 if [ -z "$temp4prj_name" ];then
 	temp4prj_name=proj
 fi
-proj_name_sum="${temp4prj_name}\n${proj_name_extern_sum}"
+proj_name_sum="${temp4prj_name}---->主程序\n${proj_name_extern_sum}"
 #exit 1
 proj_name= #项目的名字
 project=
