@@ -79,6 +79,7 @@ fi
 	fi
 	done
 }
+
 		prj_check
 		proj_Select $temp_item
 if ! [ "$configure_exist" == "YES" ];then
@@ -88,26 +89,29 @@ if ! [ "$configure_exist" == "YES" ];then
 			proj_name=Myarm
 		fi
 		echo 'configure_type_mk=YES' > configure_type.mk
+		echo "root_dir=." >> configure_type.mk
 		echo "configure_type=$proj_name" >> configure_type.mk
 		echo 'HOST=arm' >> configure_type.mk
 		echo "proj_name_bak=$proj_name" >> configure_type.mk
 		echo "proj_name=$proj_name" >> configure_type.mk
 else
 		proj_name=$project
-		if [ "$temp4prj_name" == "$project" ];then
-		#		export `cat configure_type.mk | grep "proj_name_bak="`
-		#proj_name=$proj_name_bak
-		#unset proj_name_bak
-		HOST=arm
-	else
-		HOST=x86
-	fi
+		case "$proj_name" in
+		"$temp4prj_name" )
+			root_dir=.
+			;;
+		#		"other" )
+			#	root_dir=__other
+			#	;;
+		* )
+			root_dir=tools_src\\/${proj_name}
+			;;
+		esac
 		echo "\$d" > sed.sh
 		echo "s/^configure_type=.*$/configure_type=$project/g" >> sed.sh
-		echo "s/^HOST=.*$/HOST=$HOST/g" >> sed.sh
+		echo "s/^root_dir=.*$/root_dir=$root_dir/g" >> sed.sh
 		sed -i -f sed.sh configure_type.mk
 		echo "proj_name=$proj_name" >> configure_type.mk
-		echo "转到${HOST}项目"
 		rm sed.sh -fr
 fi
 exit 0
