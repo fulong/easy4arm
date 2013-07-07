@@ -22,9 +22,11 @@ if [ "$root_dir" == "." ];then
 	#extend_dir变量，在lib.sh中定义
 	find $root_dir  | grep '\.d$' | grep -v "$extend_dir" |  xargs rm -f
 	find $root_dir  | grep '\.o$' | grep -v "$extend_dir" |  xargs rm -f
+	find $root_dir  | grep '\.bin$' | grep -v "$extend_dir" |  xargs rm -f
 else
 	find $root_dir  | grep '\.d$' |  xargs rm -f
 	find $root_dir  | grep '\.o$' |  xargs rm -f
+	find $root_dir  | grep '\.bin$' |  xargs rm -f
 fi
 }
 #item_update() 

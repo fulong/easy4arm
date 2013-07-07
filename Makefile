@@ -3,7 +3,6 @@
 #@brief 编译整个项目
 #@data 2012-6-22-21:21
 ###############################################################
-#configure_type：项目类型，目前有setting，arm，这个向脚本传递的信息。
 
 SHELL=/bin/bash
 sinclude configure_type.mk
@@ -23,13 +22,12 @@ include_open=$(shell cat ${log_dir}/$(proj_name).log | tail -n1)
 endif
 
 Depend_OBJ=$(OBJ:.o=.d)
-.PHONY:status allclean update configure all clean distclean install setting dclean change2others
+#将会出现的伪目标。
+.PHONY:status allclean update configure all clean distclean install setting dclean change2others compilingx
 ifeq "$(configure_on)" "YES"
 all:
 	@echo "include_open" >> ${log_dir}/$(proj_name).log
 #	@make $(OBJ)
-	@make $(LIBA)
-	@read
 	@make $(proj_name).bin
 	@echo "工程编译安装完成" | tee -a ${log_dir}/$(proj_name).log
 	@date >> ${log_dir}/$(proj_name).log    
@@ -47,6 +45,7 @@ else
 	gcc -o ${exe_dir}/$(proj_name).bin $^
 endif
 $(LIBA):
+	@echo "$*"
 	@export dir=`echo $* | sed 's/\.a$$//g'`;export lib_name=`echo $* | sed 's/^.*\///g'`;\
 	export on=`echo "$*" | grep 'libc\/'`;\
 	echo $*;echo $on;read;if ! [ -z "$on" ];then \
@@ -137,13 +136,15 @@ distclean:
 	@echo "清除所有自动生成的文件" | tee -a ${log_dir}/other.log
 	@date >> ${log_dir}/other.log
 	@make allclean
-	@cp $(root_dir)/$(proj_name).mk $(proj_name).bak;
-	 ${RM} $(root_dir)/$(proj_name).mk
-	@mktmp=$$(echo -n `ls *.mk | sed  s/configure_type.mk//g`);if ! [ -z "$$mktmp" ];then \
+	@cp $(root_dir)/$(proj_name).mk $(root_dir)/$(proj_name).bak;\
+	${RM} $(root_dir)/$(proj_name).mk;${RM} $(proj_name).mk;
+	@mktmp=$$(echo -n `ls *.mk | sed  s/configure_type.mk//g`);echo $$mktmp;if ! [ -z "$$mktmp" ];then \
 	cp configure_type.mk configure_type.bak;./tools/configure_type.sh "YES" "$$mktmp" $(proj_name_bak);\
 	export `cat configure_type.mk | grep "proj_name="`;if [ -f "$${proj_name}.mk" ];then \
-	${RM} $(proj_name).bak;${RM} configure_type.bak;echo "成功删除$(proj_name)项目。";\
-	else mv configure_type.bak configure_type.mk;mv $(proj_name).bak $(root_dir)/$(proj_name).mk;echo "$${proj_name}.mk文件不存在,删除$(proj_name)项目失败。";exit 1;\
+	${RM} $(root_dir)/$(proj_name).bak;${RM} configure_type.bak;proj_row=`cat -n configure_type.mk | grep "$(proj_name)_exe_dir_bak=" | cut -d$$'\t' -f 1`;\
+	proj_row=`echo $$proj_row`;echo "$${proj_row}d" > sed.sh;sed -i -f sed.sh configure_type.mk;${RM} sed.sh;echo "成功删除$(proj_name)项目。";\
+	else mv configure_type.bak configure_type.mk;mv $(root_dir)/$(proj_name).bak $(root_dir)/$(proj_name).mk;\
+	echo "$${proj_name}.mk文件不存在,删除$(proj_name)项目失败。";ln -s $(root_dir)/$(proj_name).mk . ;exit 1;\
 	fi;\
 	else 	 ${RM} *.mk;${RM} $(proj_name).bak;${RM} ./tools/*.bin;\
 	if ! [ -z  "$(libc)" ];then \
@@ -163,22 +164,22 @@ endif #ifeq "$(configure_on)" "YES"
 status:
 ifneq "$(configure_on)" "YES"
 	@echo "configure文件不存在" && exit 1
-endif
+else
+ifneq "$(configure_type)" ""
 ifeq "$(configure_type)" "$(proj_name_bak)"
-	@echo "Makefile目前在ARM项目状态中"
+	@echo "Makefile目前在主项目状态中"
+	@echo "使用的处理器为$(ARCH)"
+else
+	@echo "Makefile目前在编译子工具项目状态中($(configure_type))"
 	@echo "使用的处理器为$(ARCH)"
 endif
-ifeq "$(configure_type)" "setting"
-	@echo "Makefile目前在编译linux工具项目状态中(setting.bin)"
-endif
-ifeq "$(configure_type)" "mkimage4a8"
-	@echo "Makefile目前在编译linux工具项目状态中(mkimage4a8.bin)"
 endif
 ifneq "$(libc)" ""
 	@echo "当前使用了libc库"
 endif
 ifneq "$(OS)" ""
 	@echo "当前使用了$(OS)库"
+endif
 endif
 
 #如果使用了下面语句，makefile将自动重建依赖文件

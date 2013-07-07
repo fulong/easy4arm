@@ -11,7 +11,7 @@ source tools/lib.sh
 
 configure_exist=$1
 temp_item=
-temp_item_var=$2
+temp_item_var="$2"
 temp4prj_name=$3
 if [ -z "$temp4prj_name" ];then
 	temp4prj_name=proj
@@ -34,7 +34,7 @@ do
 			echo "unknown:$temp"
 			echo "工程不会生成这个mk文件。"
 	else		
-			temp_item="$check_proj_name_temp  --->$temp\n$temp_item"
+			temp_item="$check_proj_name_temp--->$temp\n$temp_item"
 	fi
 done
 else
@@ -45,7 +45,7 @@ fi
 proj_Select()
 {
 	local proj_VAR="$1"
-	temp_information="请输入转换的项目名称。你可以选择的项目名称(目前支持的)如下.\n"
+	local temp_information="请输入转换的项目名称。你可以选择的项目名称(目前支持的)如下.\n"
 	local flag=1 #初始化这个自动变量，使下面的能正确使用这个变量
 	local proj_select=
 	local check_proj_temp
@@ -99,6 +99,7 @@ else
 		case "$proj_name" in
 		"$temp4prj_name" )
 			root_dir=.
+			HOST=arm
 			;;
 		#		"other" )
 			#	root_dir=__other
@@ -109,6 +110,7 @@ else
 		esac
 		echo "\$d" > sed.sh
 		echo "s/^configure_type=.*$/configure_type=$project/g" >> sed.sh
+		echo "s/^HOST=.*$/HOST=$HOST/g" >> sed.sh
 		echo "s/^root_dir=.*$/root_dir=$root_dir/g" >> sed.sh
 		sed -i -f sed.sh configure_type.mk
 		echo "proj_name=$proj_name" >> configure_type.mk

@@ -14,7 +14,9 @@ if [ -z "$proj_name" ] || [ -z "$ARCH" ];then
 	echo "Error!!Please correct to config this project."
 	exit 1
 fi
-mk_name=${proj_name}.mk
+root_dir=$(grep 'root_dir=' configure_type.mk)
+export $root_dir
+mk_name=${root_dir}/${proj_name}.mk
 tools_install_dir=./tools
 install_dir=$(grep 'exe_dir=' $mk_name)
 export $install_dir
